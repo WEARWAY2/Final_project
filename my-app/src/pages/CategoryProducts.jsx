@@ -707,7 +707,9 @@ const CategoryProducts = () => {
                           loading="lazy"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = `https://placehold.co/800x1000/667eea/white?text=${encodeURIComponent(product.name)}`;
+                            e.target.src = `https://placehold.co/800x1000/667eea/white?text=${encodeURIComponent(
+                              product.name
+                            )}`;
                           }}
                         />
 
