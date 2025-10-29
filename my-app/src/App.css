@@ -1,77 +1,21 @@
-:root {
-  --container: 1100px;
-  --accent: #2563eb;
-  --muted: #6b7280;
-}
-
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 1rem 1.25rem;
-}
-
-.site-header {
-  background: #fff;
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.site-header .container {
+/* App Container */
+.app {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
-.brand {
+/* Reset some basic styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
-  font-size: 1.25rem;
-}
-
-.nav a {
-  margin-left: 1rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.hero {
-  padding: 2rem 0;
-  text-align: left;
-}
-
-.products {
-  padding: 1rem 0 3rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.card {
-  border: 1px solid #e5e7eb;
-  padding: 1rem;
-  border-radius: 8px;
-  background: #fff;
-}
-
-.price {
-  color: var(--muted);
-  margin: 0.5rem 0;
-}
-
-.btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.site-footer {
-  padding: 1rem 0;
-  border-top: 1px solid #e6e6e6;
-  background: #fafafa;
-  text-align: center;
-  color: var(--muted);
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

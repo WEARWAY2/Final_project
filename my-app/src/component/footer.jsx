@@ -50,7 +50,7 @@ const Footer = () => {
         <div className="footer-content">
           {/* Company Info */}
           <div className="footer-column company-info">
-            <h3 className="footer-logo">SHOP.CO</h3>
+            <h3 className="footer-logo">WearWay</h3>
             <p className="company-description">
               We have clothes that suits your style and which you're proud to
               wear. From women to men.
@@ -210,7 +210,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p className="copyright">Shop.co © 2000-2023, All Rights Reserved</p>
+          <p className="copyright">WearWay © 2000-2023, All Rights Reserved</p>
           <div className="payment-methods">
             <img src="/visa.svg" alt="Visa" className="payment-icon" />
             <img
