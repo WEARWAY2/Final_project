@@ -1,0 +1,950 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import "./CategoryProducts.css";
+
+const CategoryProducts = () => {
+  const { category } = useParams();
+  const { addToCart, addToWishlist, isInWishlist } = useCart();
+  const [priceRange, setPriceRange] = useState([0, 500]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedStyles, setSelectedStyles] = useState([]);
+  const [sortBy, setSortBy] = useState("Most Popular");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [notification, setNotification] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState({});
+  const itemsPerPage = 9;
+
+  const handleImageSlide = (productId, direction, imagesLength) => {
+    setCurrentImageIndex((prev) => {
+      const currentIndex = prev[productId] || 0;
+      let newIndex;
+
+      if (direction === "next") {
+        newIndex = (currentIndex + 1) % imagesLength;
+      } else {
+        newIndex = currentIndex === 0 ? imagesLength - 1 : currentIndex - 1;
+      }
+
+      return { ...prev, [productId]: newIndex };
+    });
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setNotification(`${product.name} added to cart!`);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  const handleAddToWishlist = (product) => {
+    addToWishlist(product);
+    const isInList = isInWishlist(product.id);
+    setNotification(
+      isInList
+        ? `${product.name} removed from wishlist!`
+        : `${product.name} added to wishlist!`
+    );
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  // Dummy product data
+  const products = {
+    men: [
+      {
+        id: 1,
+        name: "Gradient Graphic T-shirt",
+        price: 145,
+        rating: 3.5,
+        image:
+          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+          "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+          "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&q=80",
+        ],
+        colors: ["white"],
+        sizes: ["Small", "Medium", "Large", "X-Large"],
+        type: "T-shirts",
+        style: "Casual",
+      },
+      {
+        id: 2,
+        name: "Polo with Tipping Details",
+        price: 180,
+        rating: 4.5,
+        image:
+          "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=800&q=80",
+          "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80",
+          "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?w=800&q=80",
+        ],
+        colors: ["pink"],
+        sizes: ["Medium", "Large", "X-Large"],
+        type: "Shirts",
+        style: "Casual",
+      },
+      {
+        id: 3,
+        name: "Black Striped T-shirt",
+        price: 120,
+        originalPrice: 160,
+        discount: 30,
+        rating: 5.0,
+        image:
+          "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
+          "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=800&q=80",
+          "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
+        ],
+        colors: ["black", "white"],
+        sizes: ["Small", "Medium", "Large"],
+        type: "T-shirts",
+        style: "Casual",
+      },
+      {
+        id: 4,
+        name: "Skinny Fit Jeans",
+        price: 240,
+        originalPrice: 260,
+        discount: 20,
+        rating: 3.5,
+        image:
+          "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80",
+          "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800&q=80",
+          "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&q=80",
+        ],
+        colors: ["blue"],
+        sizes: ["Small", "Medium", "Large", "X-Large", "XX-Large"],
+        type: "Jeans",
+        style: "Casual",
+      },
+      {
+        id: 5,
+        name: "Checkered Shirt",
+        price: 180,
+        rating: 4.5,
+        image:
+          "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+          "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800&q=80",
+          "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
+        ],
+        colors: ["red", "blue"],
+        sizes: ["Medium", "Large", "X-Large"],
+        type: "Shirts",
+        style: "Formal",
+      },
+      {
+        id: 6,
+        name: "Sleeve Striped T-shirt",
+        price: 130,
+        originalPrice: 160,
+        discount: 30,
+        rating: 4.5,
+        image:
+          "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=800&q=80",
+          "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+          "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=800&q=80",
+        ],
+        colors: ["orange", "black"],
+        sizes: ["Small", "Medium", "Large", "X-Large"],
+        type: "T-shirts",
+        style: "Casual",
+      },
+      {
+        id: 7,
+        name: "Vertical Striped Shirt",
+        price: 212,
+        originalPrice: 232,
+        discount: 20,
+        rating: 5.0,
+        image:
+          "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1602810316498-ab67cf68c8e1?w=800&q=80",
+          "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=800&q=80",
+          "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+        ],
+        colors: ["green"],
+        sizes: ["Medium", "Large", "X-Large"],
+        type: "Shirts",
+        style: "Formal",
+      },
+      {
+        id: 8,
+        name: "Courage Graphic T-shirt",
+        price: 145,
+        rating: 4.0,
+        image:
+          "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+          "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80",
+          "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
+        ],
+        colors: ["orange"],
+        sizes: ["Small", "Medium", "Large"],
+        type: "T-shirts",
+        style: "Party",
+      },
+      {
+        id: 9,
+        name: "Loose Fit Bermuda Shorts",
+        price: 80,
+        rating: 3.0,
+        image:
+          "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&q=80",
+          "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80",
+        ],
+        colors: ["blue"],
+        sizes: ["Small", "Medium", "Large", "X-Large"],
+        type: "Shorts",
+        style: "Casual",
+      },
+    ],
+    women: [
+      {
+        id: 10,
+        name: "Floral Summer Dress",
+        price: 195,
+        rating: 4.5,
+        image:
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80",
+          "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&q=80",
+          "https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=800&q=80",
+        ],
+        colors: ["pink", "white"],
+        sizes: ["Small", "Medium", "Large"],
+        type: "T-shirts",
+        style: "Party",
+      },
+      {
+        id: 11,
+        name: "Elegant Blazer",
+        price: 280,
+        rating: 5.0,
+        image:
+          "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800&q=80",
+          "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=800&q=80",
+        ],
+        colors: ["black"],
+        sizes: ["Small", "Medium", "Large", "X-Large"],
+        type: "Shirts",
+        style: "Formal",
+      },
+      {
+        id: 12,
+        name: "Casual Denim Jacket",
+        price: 165,
+        originalPrice: 200,
+        discount: 25,
+        rating: 4.0,
+        image:
+          "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80",
+          "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&q=80",
+          "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=800&q=80",
+        ],
+        colors: ["blue"],
+        sizes: ["Small", "Medium", "Large"],
+        type: "Jeans",
+        style: "Casual",
+      },
+    ],
+    kids: [
+      {
+        id: 13,
+        name: "Cartoon Print T-shirt",
+        price: 65,
+        rating: 4.5,
+        image:
+          "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=800&q=80",
+          "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800&q=80",
+          "https://images.unsplash.com/photo-1622290319260-5b611d53429e?w=800&q=80",
+        ],
+        colors: ["yellow", "blue"],
+        sizes: ["XX-Small", "X-Small", "Small"],
+        type: "T-shirts",
+        style: "Casual",
+      },
+      {
+        id: 14,
+        name: "Comfortable Joggers",
+        price: 85,
+        rating: 4.0,
+        image:
+          "https://images.unsplash.com/photo-1555274175-1612febedde0?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1555274175-1612febedde0?w=800&q=80",
+          "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=800&q=80",
+        ],
+        colors: ["gray"],
+        sizes: ["X-Small", "Small", "Medium"],
+        type: "Shorts",
+        style: "Gym",
+      },
+      {
+        id: 15,
+        name: "Colorful Hoodie",
+        price: 95,
+        originalPrice: 120,
+        discount: 20,
+        rating: 5.0,
+        image:
+          "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80",
+          "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800&q=80",
+          "https://images.unsplash.com/photo-1622290319260-5b611d53429e?w=800&q=80",
+        ],
+        colors: ["red", "blue", "green"],
+        sizes: ["X-Small", "Small", "Medium"],
+        type: "Hoodie",
+        style: "Casual",
+      },
+    ],
+  };
+
+  const colors = [
+    { name: "Green", value: "green", color: "#00C12B" },
+    { name: "Red", value: "red", color: "#F50606" },
+    { name: "Yellow", value: "yellow", color: "#F5DD06" },
+    { name: "Orange", value: "orange", color: "#F57906" },
+    { name: "Cyan", value: "cyan", color: "#06CAF5" },
+    { name: "Blue", value: "blue", color: "#063AF5" },
+    { name: "Purple", value: "purple", color: "#7D06F5" },
+    { name: "Pink", value: "pink", color: "#F506A4" },
+    { name: "White", value: "white", color: "#FFFFFF" },
+    { name: "Black", value: "black", color: "#000000" },
+  ];
+
+  const productCategories = ["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"];
+  const dressStyles = ["Casual", "Formal", "Party", "Gym"];
+
+  const sizes = [
+    "XX-Small",
+    "X-Small",
+    "Small",
+    "Medium",
+    "Large",
+    "X-Large",
+    "XX-Large",
+    "3X-Large",
+    "4X-Large",
+  ];
+
+  const allProducts = products[category] || products.men;
+
+  // Filter products
+  useEffect(() => {
+    let filtered = [...allProducts];
+
+    // Filter by price
+    filtered = filtered.filter(
+      (product) =>
+        product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    // Filter by colors
+    if (selectedColors.length > 0) {
+      filtered = filtered.filter((product) =>
+        product.colors.some((color) => selectedColors.includes(color))
+      );
+    }
+
+    // Filter by sizes
+    if (selectedSizes.length > 0) {
+      filtered = filtered.filter((product) =>
+        product.sizes.some((size) => selectedSizes.includes(size))
+      );
+    }
+
+    // Filter by categories (types)
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedCategories.includes(product.type)
+      );
+    }
+
+    // Filter by dress styles
+    if (selectedStyles.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedStyles.includes(product.style)
+      );
+    }
+
+    // Sort products
+    switch (sortBy) {
+      case "Newest":
+        filtered = filtered.sort((a, b) => b.id - a.id);
+        break;
+      case "Price: Low to High":
+        filtered = filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "Price: High to Low":
+        filtered = filtered.sort((a, b) => b.price - a.price);
+        break;
+      case "Most Popular":
+      default:
+        filtered = filtered.sort((a, b) => b.rating - a.rating);
+        break;
+    }
+
+    setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
+  }, [
+    priceRange,
+    selectedColors,
+    selectedSizes,
+    selectedCategories,
+    selectedStyles,
+    sortBy,
+    allProducts,
+  ]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  const toggleColor = (color) => {
+    setSelectedColors((prev) =>
+      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
+    );
+  };
+
+  const toggleSize = (size) => {
+    setSelectedSizes((prev) =>
+      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
+    );
+  };
+
+  const toggleCategory = (cat) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
+
+  const toggleStyle = (style) => {
+    setSelectedStyles((prev) =>
+      prev.includes(style) ? prev.filter((s) => s !== style) : [...prev, style]
+    );
+  };
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const applyFilters = () => {
+    // Filters are already applied via useEffect
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const resetFilters = () => {
+    setPriceRange([0, 500]);
+    setSelectedColors([]);
+    setSelectedSizes([]);
+    setSelectedCategories([]);
+    setSelectedStyles([]);
+    setSortBy("Most Popular");
+  };
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <span key={i} className="star filled">
+          ★
+        </span>
+      );
+    }
+    if (hasHalfStar) {
+      stars.push(
+        <span key="half" className="star half">
+          ★
+        </span>
+      );
+    }
+    const remaining = 5 - Math.ceil(rating);
+    for (let i = 0; i < remaining; i++) {
+      stars.push(
+        <span key={`empty-${i}`} className="star empty">
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  return (
+    <div className="category-products-page">
+      {notification && <div className="notification">{notification}</div>}
+
+      {/* Mobile Filter Toggle Button */}
+      <button
+        className="mobile-filter-toggle"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path
+            d="M2 5h16M2 10h16M2 15h16"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+        Filters
+      </button>
+
+      {/* Sidebar Overlay for Mobile */}
+      {isSidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
+      <div className="products-container">
+        {/* Sidebar Filters */}
+        <aside className={`filters-sidebar ${isSidebarOpen ? "open" : ""}`}>
+          <div className="filters-header">
+            <h3>Filters</h3>
+            <button
+              className="filter-close-btn"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M18 6L6 18M6 6l12 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Categories */}
+          <div className="filter-section">
+            {productCategories.map((cat) => (
+              <h4
+                key={cat}
+                className={`filter-item ${
+                  selectedCategories.includes(cat) ? "active" : ""
+                }`}
+                onClick={() => toggleCategory(cat)}
+              >
+                {cat}
+              </h4>
+            ))}
+          </div>
+
+          {/* Price Range */}
+          <div className="filter-section">
+            <h4>Price</h4>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+              className="price-slider"
+            />
+            <div className="price-range-display">
+              ${priceRange[0]} - ${priceRange[1]}
+            </div>
+          </div>
+
+          {/* Colors */}
+          <div className="filter-section">
+            <h4>Colors</h4>
+            <div className="color-options">
+              {colors.map((color) => (
+                <button
+                  key={color.value}
+                  className={`color-btn ${
+                    selectedColors.includes(color.value) ? "selected" : ""
+                  }`}
+                  style={{ backgroundColor: color.color }}
+                  onClick={() => toggleColor(color.value)}
+                  title={color.name}
+                >
+                  {selectedColors.includes(color.value) && (
+                    <span className="check-mark">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Sizes */}
+          <div className="filter-section">
+            <h4>Size</h4>
+            <div className="size-options">
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  className={`size-btn ${
+                    selectedSizes.includes(size) ? "selected" : ""
+                  }`}
+                  onClick={() => toggleSize(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Dress Style */}
+          <div className="filter-section">
+            <h4>Dress Style</h4>
+            <div className="style-options">
+              {dressStyles.map((style) => (
+                <button
+                  key={style}
+                  className={`style-btn ${
+                    selectedStyles.includes(style) ? "selected" : ""
+                  }`}
+                  onClick={() => toggleStyle(style)}
+                >
+                  {style}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            className="apply-filter-btn"
+            onClick={() => {
+              applyFilters();
+              setIsSidebarOpen(false);
+            }}
+          >
+            Apply Filter
+          </button>
+          <button
+            className="reset-filter-btn"
+            onClick={() => {
+              resetFilters();
+              setIsSidebarOpen(false);
+            }}
+          >
+            Reset Filters
+          </button>
+        </aside>
+
+        {/* Products Grid */}
+        <main className="products-main">
+          <div className="products-header">
+            <h2 className="category-title">
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </h2>
+            <div className="products-sort">
+              <span>
+                Showing {startIndex + 1}-
+                {Math.min(endIndex, filteredProducts.length)} of{" "}
+                {filteredProducts.length} Products
+              </span>
+              <select
+                className="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option>Most Popular</option>
+                <option>Newest</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="products-grid">
+            {currentProducts.length > 0 ? (
+              currentProducts.map((product, index) => {
+                const images = product.images || [product.image];
+                const currentIndex = currentImageIndex[product.id] || 0;
+
+                return (
+                  <div
+                    key={product.id}
+                    className="product-card"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="product-image">
+                      {/* Image Slider */}
+                      <div className="product-image-slider">
+                        <img
+                          src={images[currentIndex]}
+                          alt={product.name}
+                          className="product-img"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://placehold.co/800x1000/667eea/white?text=${encodeURIComponent(product.name)}`;
+                          }}
+                        />
+
+                        {/* Navigation Arrows */}
+                        {images.length > 1 && (
+                          <>
+                            <button
+                              className="slider-arrow slider-arrow-prev"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleImageSlide(
+                                  product.id,
+                                  "prev",
+                                  images.length
+                                );
+                              }}
+                              aria-label="Previous image"
+                            >
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                              >
+                                <path
+                                  d="M15 18L9 12L15 6"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              className="slider-arrow slider-arrow-next"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleImageSlide(
+                                  product.id,
+                                  "next",
+                                  images.length
+                                );
+                              }}
+                              aria-label="Next image"
+                            >
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                              >
+                                <path
+                                  d="M9 18L15 12L9 6"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </button>
+                          </>
+                        )}
+
+                        {/* Image Indicators */}
+                        {images.length > 1 && (
+                          <div className="image-indicators">
+                            {images.map((_, idx) => (
+                              <button
+                                key={idx}
+                                className={`indicator-dot ${
+                                  idx === currentIndex ? "active" : ""
+                                }`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setCurrentImageIndex((prev) => ({
+                                    ...prev,
+                                    [product.id]: idx,
+                                  }));
+                                }}
+                                aria-label={`Go to image ${idx + 1}`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Discount Badge */}
+                      {product.discount && (
+                        <div className="discount-badge-overlay">
+                          -{product.discount}%
+                        </div>
+                      )}
+
+                      <div className="product-actions">
+                        <button
+                          className={`action-btn wishlist-btn ${
+                            isInWishlist(product.id) ? "active" : ""
+                          }`}
+                          onClick={() => handleAddToWishlist(product)}
+                          title="Add to Wishlist"
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill={
+                              isInWishlist(product.id) ? "currentColor" : "none"
+                            }
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </button>
+                        <button
+                          className="action-btn cart-btn"
+                          onClick={() => handleAddToCart(product)}
+                          title="Add to Cart"
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M9 2L7 6H21L19 2H9Z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M6 6H22L20 18H8L6 6Z"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <circle cx="9" cy="21" r="1" fill="currentColor" />
+                            <circle cx="19" cy="21" r="1" fill="currentColor" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="product-info">
+                      <h3 className="product-name">{product.name}</h3>
+                      <div className="product-rating">
+                        <div className="stars">
+                          {renderStars(product.rating)}
+                        </div>
+                        <span className="rating-value">{product.rating}/5</span>
+                      </div>
+                      <div className="product-price">
+                        <span className="current-price">${product.price}</span>
+                        {product.originalPrice && (
+                          <span className="original-price">
+                            ${product.originalPrice}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="no-products">
+                <p>No products found matching your filters.</p>
+                <button className="reset-filter-btn" onClick={resetFilters}>
+                  Reset Filters
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Pagination */}
+          {filteredProducts.length > itemsPerPage && (
+            <div className="pagination">
+              <button
+                className="pagination-btn"
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                ← Previous
+              </button>
+
+              {[...Array(totalPages)].map((_, index) => {
+                const page = index + 1;
+                // Show first page, last page, current page, and pages around current
+                if (
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 1 && page <= currentPage + 1)
+                ) {
+                  return (
+                    <button
+                      key={page}
+                      className={`pagination-number ${
+                        currentPage === page ? "active" : ""
+                      }`}
+                      onClick={() => goToPage(page)}
+                    >
+                      {page}
+                    </button>
+                  );
+                } else if (
+                  page === currentPage - 2 ||
+                  page === currentPage + 2
+                ) {
+                  return (
+                    <span key={page} className="pagination-dots">
+                      ...
+                    </span>
+                  );
+                }
+                return null;
+              })}
+
+              <button
+                className="pagination-btn"
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next →
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default CategoryProducts;
