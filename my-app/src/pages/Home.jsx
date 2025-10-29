@@ -1,6 +1,11 @@
 import React from "react";
 import "./Home.css";
 import heroImage from "../assets/hero.png";
+import versaceLogo from "../assets/Group (1).svg";
+import zaraLogo from "../assets/zara-logo-1 1.svg";
+import gucciLogo from "../assets/gucci-logo-1 1.svg";
+import pradaLogo from "../assets/prada-logo-1 1.svg";
+import calvinKleinLogo from "../assets/Group.svg";
 
 const Home = () => {
   return (
@@ -85,6 +90,25 @@ const Home = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Brand Logos Section */}
+        <div className="brand-logos-section">
+          <div className="brand-logo">
+            <img src={versaceLogo} alt="VERSACE" />
+          </div>
+          <div className="brand-logo">
+            <img src={zaraLogo} alt="ZARA" />
+          </div>
+          <div className="brand-logo">
+            <img src={gucciLogo} alt="GUCCI" />
+          </div>
+          <div className="brand-logo">
+            <img src={pradaLogo} alt="PRADA" />
+          </div>
+          <div className="brand-logo">
+            <img src={calvinKleinLogo} alt="Calvin Klein" />
           </div>
         </div>
       </section>

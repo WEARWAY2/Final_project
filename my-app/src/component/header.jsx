@@ -12,32 +12,11 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="nav-menu">
-          <div className="nav-item dropdown">
-            <span>Shop</span>
-            <svg
-              width="12"
-              height="8"
-              viewBox="0 0 12 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 1L6 6L11 1"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <a href="#on-sale" className="nav-item">
-            On Sale
+          <a href="/" className="nav-item">
+            Home
           </a>
-          <a href="#new-arrivals" className="nav-item">
-            New Arrivals
-          </a>
-          <a href="#brands" className="nav-item">
-            Brands
+          <a href="/shop" className="nav-item">
+            Shop
           </a>
         </nav>
 
