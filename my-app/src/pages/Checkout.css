@@ -1,0 +1,242 @@
+/* General page styling */
+.checkout-page {
+  width: min(100%, 1200px);
+  margin-inline: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Added a light background color for the page */
+  font-family: sans-serif; /* Using a common sans-serif font */
+}
+
+/* Page Header */
+.checkout-header h1 {
+  font-size: 2.5rem; /* Increased font size */
+  font-weight: 900; /* Bolder font weight */
+  margin: 0 0 2rem 0; /* Adjusted margin */
+}
+
+/* Main Grid Layout */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px; /* Adjusted column width for the summary */
+  gap: 2rem; /* Increased gap between items and summary */
+}
+
+/* Cart Items Section */
+.checkout-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Increased gap between individual items */
+}
+
+/* Individual Cart Item Row */
+.ci-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto; /* Adjusted for image size */
+  align-items: center;
+  gap: 1.5rem;
+  background: #fff;
+  border: none; /* Removed border */
+  border-radius: 16px; /* Increased border-radius for a softer look */
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Added a subtle shadow */
+}
+
+.ci-thumb {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  background: #f2f2f2;
+  object-fit: cover;
+  display: block;
+}
+
+.ci-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ci-attrs {
+  display: flex;
+  flex-direction: column; /* Stacked attributes vertically */
+  gap: 0.25rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.ci-price {
+  margin-top: 0.75rem;
+  font-weight: 700;
+  font-size: 1.2rem; /* Made price more prominent */
+}
+
+/* Item Actions (Quantity and Remove) */
+.ci-actions {
+  display: flex;
+  flex-direction: column; /* Stacked remove button above quantity */
+  align-items: flex-end;
+  gap: 2rem;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: none; /* Removed border */
+  border-radius: 999px;
+  padding: 0.5rem;
+  background-color: #f5f5f5; /* Light grey background for the whole component */
+}
+
+.qty button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #fff; /* White background for buttons */
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #888;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow on buttons */
+}
+
+.qty-val {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.ci-remove {
+  background: transparent; /* Made background transparent */
+  border: none;
+  color: #e53935;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  font-size: 1.25rem; /* Increased icon size */
+}
+
+/* Order Summary Section */
+.order-summary {
+  background: #fff;
+  border: none; /* Removed border */
+  border-radius: 20px; /* Increased border-radius */
+  padding: 1.75rem;
+  height: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+}
+
+.order-summary h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.os-row,
+.os-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.os-total {
+  border-top: 1px solid #f0f0f0;
+  margin-top: 1rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.os-row .neg {
+  color: #e53935;
+}
+
+/* Promo Code Section */
+.promo {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.promo input {
+  flex: 1;
+  border-radius: 999px;
+  border: none;
+  background-color: #f5f5f5; /* Light grey background for input */
+  padding: 0.75rem 1.25rem;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn-ghost {
+  /* This is the "Apply" button */
+  border-radius: 999px;
+  border: none;
+  background: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  /* This is the "Go to Checkout" button */
+  border-radius: 999px;
+  border: none;
+  background: #000;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.block {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-page {
+    padding: 1rem;
+  }
+  .checkout-header h1 {
+    font-size: 2rem;
+  }
+  .ci-row {
+    grid-template-columns: 80px 1fr; /* Stack actions below info on small screens */
+    gap: 1rem;
+  }
+  .ci-info {
+    grid-column: 2 / 3;
+  }
+  .ci-actions {
+    grid-column: 1 / 3; /* Actions span full width */
+    flex-direction: row-reverse; /* Puts remove button on the left */
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  .ci-thumb {
+    width: 80px;
+    height: 80px;
+  }
+}

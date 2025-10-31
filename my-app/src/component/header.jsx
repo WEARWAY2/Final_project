@@ -377,7 +377,7 @@ const Header = () => {
               <span className="badge">{wishlistCount}</span>
             )}
           </button>
-          <button className="icon-button" aria-label="User Account">
+          <button className="icon-button" aria-label="User Account" onClick={() => navigate("/checkout")}>
             <svg
               width="24"
               height="24"
@@ -453,7 +453,13 @@ const Header = () => {
                 {cartItems.map((item) => (
                   <div key={item.id} className="drawer-item cart-item">
                     <div className="item-image">
-                      <div className="item-img-placeholder"></div>
+                      <img
+                        src={item.image || (item.images && item.images[0]) || `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`}
+                        alt={item.name}
+                        onError={(e) => {
+                          e.currentTarget.src = `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`;
+                        }}
+                      />
                     </div>
                     <div className="item-details">
                       <h3>{item.name}</h3>
@@ -551,7 +557,7 @@ const Header = () => {
                   ${getTotalPrice().toFixed(2)}
                 </span>
               </div>
-              <button className="checkout-btn">Proceed to Checkout</button>
+              <button className="checkout-btn" onClick={() => { setIsCartOpen(false); navigate("/checkout"); }}>Proceed to Checkout</button>
             </div>
           )}
         </div>
@@ -603,7 +609,13 @@ const Header = () => {
                 {wishlistItems.map((item) => (
                   <div key={item.id} className="drawer-item wishlist-item">
                     <div className="item-image">
-                      <div className="item-img-placeholder"></div>
+                      <img
+                        src={item.image || (item.images && item.images[0]) || `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(item.name)}`}
+                        alt={item.name}
+                        onError={(e) => {
+                          e.currentTarget.src = `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(item.name)}`;
+                        }}
+                      />
                     </div>
                     <div className="item-details">
                       <h3>{item.name}</h3>
