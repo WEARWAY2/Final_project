@@ -1,5 +1,7 @@
 import React from "react";
 import "./footer.css";
+import { FaPaypal, FaCcMastercard, FaApplePay, FaCcVisa, FaGooglePay } from "react-icons/fa";
+
 
 const Footer = () => {
   return (
@@ -210,21 +212,13 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p className="copyright">WearWay © 2000-2023, All Rights Reserved</p>
+          <p className="copyright">WearWay © 2025, All Rights Reserved</p>
           <div className="payment-methods">
-            <img src="/visa.svg" alt="Visa" className="payment-icon" />
-            <img
-              src="/mastercard.svg"
-              alt="Mastercard"
-              className="payment-icon"
-            />
-            <img src="/paypal.svg" alt="PayPal" className="payment-icon" />
-            <img src="/applepay.svg" alt="Apple Pay" className="payment-icon" />
-            <img
-              src="/googlepay.svg"
-              alt="Google Pay"
-              className="payment-icon"
-            />
+            <FaCcVisa className="payment-icon" aria-label="Visa" />
+            <FaCcMastercard className="payment-icon" aria-label="Mastercard" />
+            <FaPaypal className="payment-icon" aria-label="PayPal" />
+            <FaApplePay className="payment-icon" aria-label="Apple Pay" />
+            <FaGooglePay className="payment-icon" aria-label="Google Pay" />
           </div>
         </div>
       </div>

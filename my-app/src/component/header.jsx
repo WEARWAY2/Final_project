@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { PRODUCTS } from "../config/products";
 import "./header.css";
 
 const Header = () => {
@@ -23,136 +24,6 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
 
-  // All products data
-  const allProducts = {
-    men: [
-      {
-        id: 1,
-        name: "Gradient Graphic T-shirt",
-        price: 145,
-        rating: 3.5,
-        image: "/product-1.jpg",
-        category: "men",
-      },
-      {
-        id: 2,
-        name: "Polo with Tipping Details",
-        price: 180,
-        rating: 4.5,
-        image: "/product-2.jpg",
-        category: "men",
-      },
-      {
-        id: 3,
-        name: "Black Striped T-shirt",
-        price: 120,
-        rating: 5.0,
-        image: "/product-3.jpg",
-        category: "men",
-      },
-      {
-        id: 4,
-        name: "Skinny Fit Jeans",
-        price: 240,
-        rating: 3.5,
-        image: "/product-4.jpg",
-        category: "men",
-      },
-      {
-        id: 5,
-        name: "Checkered Shirt",
-        price: 180,
-        rating: 4.5,
-        image: "/product-5.jpg",
-        category: "men",
-      },
-      {
-        id: 6,
-        name: "Sleeve Striped T-shirt",
-        price: 130,
-        rating: 4.5,
-        image: "/product-6.jpg",
-        category: "men",
-      },
-      {
-        id: 7,
-        name: "Vertical Striped Shirt",
-        price: 212,
-        rating: 5.0,
-        image: "/product-7.jpg",
-        category: "men",
-      },
-      {
-        id: 8,
-        name: "Courage Graphic T-shirt",
-        price: 145,
-        rating: 4.0,
-        image: "/product-8.jpg",
-        category: "men",
-      },
-      {
-        id: 9,
-        name: "Loose Fit Bermuda Shorts",
-        price: 80,
-        rating: 3.0,
-        image: "/product-9.jpg",
-        category: "men",
-      },
-    ],
-    women: [
-      {
-        id: 10,
-        name: "Floral Summer Dress",
-        price: 195,
-        rating: 4.5,
-        image: "/product-10.jpg",
-        category: "women",
-      },
-      {
-        id: 11,
-        name: "Elegant Blazer",
-        price: 280,
-        rating: 5.0,
-        image: "/product-11.jpg",
-        category: "women",
-      },
-      {
-        id: 12,
-        name: "Casual Denim Jacket",
-        price: 165,
-        rating: 4.0,
-        image: "/product-12.jpg",
-        category: "women",
-      },
-    ],
-    kids: [
-      {
-        id: 13,
-        name: "Cartoon Print T-shirt",
-        price: 65,
-        rating: 4.5,
-        image: "/product-13.jpg",
-        category: "kids",
-      },
-      {
-        id: 14,
-        name: "Comfortable Joggers",
-        price: 55,
-        rating: 4.0,
-        image: "/product-14.jpg",
-        category: "kids",
-      },
-      {
-        id: 15,
-        name: "Colorful Hoodie",
-        price: 85,
-        rating: 4.5,
-        image: "/product-15.jpg",
-        category: "kids",
-      },
-    ],
-  };
-
   // Live search handler
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -161,14 +32,16 @@ const Header = () => {
     if (query.trim().length > 0) {
       // Flatten all products into a single array
       const flatProducts = [
-        ...allProducts.men,
-        ...allProducts.women,
-        ...allProducts.kids,
+        ...PRODUCTS.men.map(p => ({ ...p, category: 'men' })),
+        ...PRODUCTS.women.map(p => ({ ...p, category: 'women' })),
+        ...PRODUCTS.kids.map(p => ({ ...p, category: 'kids' })),
       ];
 
-      // Filter products based on search query
+      // Filter products based on search query (name, type, or style)
       const results = flatProducts.filter((product) =>
-        product.name.toLowerCase().includes(query.toLowerCase())
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        (product.type && product.type.toLowerCase().includes(query.toLowerCase())) ||
+        (product.style && product.style.toLowerCase().includes(query.toLowerCase()))
       );
 
       setSearchResults(results.slice(0, 6)); // Show max 6 results
@@ -184,7 +57,7 @@ const Header = () => {
     setSearchQuery("");
     setSearchResults([]);
     setIsSearchOpen(false);
-    navigate(`/shop/${product.category}`);
+    navigate(`/shop/${product.category}/${product.id}`);
   };
 
   // Close search results when clicking outside
@@ -443,7 +316,10 @@ const Header = () => {
                 <p>Your cart is empty</p>
                 <button
                   className="continue-shopping-btn"
-                  onClick={() => setIsCartOpen(false)}
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    navigate("/shop");
+                  }}
                 >
                   Continue Shopping
                 </button>
@@ -599,7 +475,10 @@ const Header = () => {
                 <p>Your wishlist is empty</p>
                 <button
                   className="continue-shopping-btn"
-                  onClick={() => setIsWishlistOpen(false)}
+                  onClick={() => {
+                    setIsWishlistOpen(false);
+                    navigate("/shop");
+                  }}
                 >
                   Continue Shopping
                 </button>
