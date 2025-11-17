@@ -557,9 +557,6 @@ const CategoryProducts = () => {
                                   ? "#ff4d4d"
                                   : "currentColor"
                               }
-                              fill={
-                                isInWishlist(product.id) ? "#ff4d4d" : "none"
-                              }
                             />
                           </motion.div>
                         </button>
