@@ -100,6 +100,7 @@ body {
 }
 
 .shop-now-button {
+  text-decoration: none;
   background-color: var(--color-dark);
   color: var(--color-light);
   border: 2px solid transparent;
@@ -543,6 +544,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   width: fit-content;
+  text-decoration: none;
 }
 
 .selling-card-cta:hover {
@@ -838,6 +840,7 @@ body {
   }
   .shop-now-button {
     align-self: center;
+    text-decoration: none;
   }
   .hero-stats {
     justify-content: center;
@@ -1028,8 +1031,6 @@ body {
   opacity: 0; /* for staggered reveal */
   transform: translateY(20px);
 }
-
-
 
 .perk-card:hover {
   transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
