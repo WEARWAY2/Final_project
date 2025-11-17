@@ -1,8 +1,18 @@
 import React from "react";
-import { motion } from 'framer-motion';
-import { FaPaypal, FaCcMastercard, FaApplePay, FaCcVisa, FaGooglePay, FaEnvelope, FaTwitter, FaFacebook, FaInstagram, FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
+import {
+  FaPaypal,
+  FaCcMastercard,
+  FaApplePay,
+  FaCcVisa,
+  FaGooglePay,
+  FaEnvelope,
+  FaTwitter,
+  FaFacebook,
+  FaInstagram,
+  FaGithub,
+} from "react-icons/fa";
 import "./footer.css";
-
 
 const Footer = () => {
   return (
@@ -17,7 +27,11 @@ const Footer = () => {
             <div className="email-input-wrapper">
               <motion.div
                 animate={{ x: [0, 3, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 <FaEnvelope size={20} color="#666" />
               </motion.div>
@@ -44,22 +58,34 @@ const Footer = () => {
             </p>
             <div className="social-icons">
               <a href="#" className="social-icon" aria-label="Twitter">
-                <motion.div whileHover={{ scale: 1.2, rotate: 5 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <FaTwitter size={24} />
                 </motion.div>
               </a>
               <a href="#" className="social-icon" aria-label="Facebook">
-                <motion.div whileHover={{ scale: 1.2, rotate: -5 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <FaFacebook size={24} />
                 </motion.div>
               </a>
               <a href="#" className="social-icon" aria-label="Instagram">
-                <motion.div whileHover={{ scale: 1.2, rotate: 5 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <FaInstagram size={24} />
                 </motion.div>
               </a>
               <a href="#" className="social-icon" aria-label="GitHub">
-                <motion.div whileHover={{ scale: 1.2, rotate: -5 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <FaGithub size={24} />
                 </motion.div>
               </a>

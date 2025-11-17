@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from 'framer-motion';
-import { FaSearch, FaShoppingCart, FaHeart, FaUser, FaTimes, FaPlus, FaMinus } from 'react-icons/fa';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { motion } from "framer-motion";
+import {
+  FaSearch,
+  FaShoppingCart,
+  FaHeart,
+  FaUser,
+  FaTimes,
+  FaPlus,
+  FaMinus,
+} from "react-icons/fa";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useCart } from "../context/CartContext";
 import { PRODUCTS } from "../config/products";
 import "./header.css";
@@ -35,16 +43,19 @@ const Header = () => {
     if (query.trim().length > 0) {
       // Flatten all products into a single array
       const flatProducts = [
-        ...PRODUCTS.men.map(p => ({ ...p, category: 'men' })),
-        ...PRODUCTS.women.map(p => ({ ...p, category: 'women' })),
-        ...PRODUCTS.kids.map(p => ({ ...p, category: 'kids' })),
+        ...PRODUCTS.men.map((p) => ({ ...p, category: "men" })),
+        ...PRODUCTS.women.map((p) => ({ ...p, category: "women" })),
+        ...PRODUCTS.kids.map((p) => ({ ...p, category: "kids" })),
       ];
 
       // Filter products based on search query (name, type, or style)
-      const results = flatProducts.filter((product) =>
-        product.name.toLowerCase().includes(query.toLowerCase()) ||
-        (product.type && product.type.toLowerCase().includes(query.toLowerCase())) ||
-        (product.style && product.style.toLowerCase().includes(query.toLowerCase()))
+      const results = flatProducts.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query.toLowerCase()) ||
+          (product.type &&
+            product.type.toLowerCase().includes(query.toLowerCase())) ||
+          (product.style &&
+            product.style.toLowerCase().includes(query.toLowerCase()))
       );
 
       setSearchResults(results.slice(0, 6)); // Show max 6 results
@@ -187,10 +198,7 @@ const Header = () => {
             aria-label="Shopping Cart"
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <FaShoppingCart size={24} />
             </motion.div>
             {cartCount > 0 && <span className="badge">{cartCount}</span>}
@@ -206,17 +214,21 @@ const Header = () => {
               animate={{ scale: wishlistCount > 0 ? [1, 1.1, 1] : 1 }}
               transition={{ duration: 0.5 }}
             >
-              <FaHeart size={24} color={wishlistCount > 0 ? "#ff4d4d" : "currentColor"} />
+              <FaHeart
+                size={24}
+                color={wishlistCount > 0 ? "#ff4d4d" : "currentColor"}
+              />
             </motion.div>
             {wishlistCount > 0 && (
               <span className="badge">{wishlistCount}</span>
             )}
           </button>
-          <button className="icon-button" aria-label="User Account" onClick={() => navigate("/checkout")}>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          <button
+            className="icon-button"
+            aria-label="User Account"
+            onClick={() => navigate("/checkout")}
+          >
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <FaUser size={24} />
             </motion.div>
           </button>
@@ -241,7 +253,11 @@ const Header = () => {
               <div className="empty-state">
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <FaShoppingCart size={80} color="#ccc" />
                 </motion.div>
@@ -262,10 +278,18 @@ const Header = () => {
                   <div key={item.id} className="drawer-item cart-item">
                     <div className="item-image">
                       <img
-                        src={item.image || (item.images && item.images[0]) || `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`}
+                        src={
+                          item.image ||
+                          (item.images && item.images[0]) ||
+                          `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(
+                            item.name
+                          )}`
+                        }
                         alt={item.name}
                         onError={(e) => {
-                          e.currentTarget.src = `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`;
+                          e.currentTarget.src = `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(
+                            item.name
+                          )}`;
                         }}
                       />
                     </div>
@@ -329,7 +353,15 @@ const Header = () => {
                   ${getTotalPrice().toFixed(2)}
                 </span>
               </div>
-              <button className="checkout-btn" onClick={() => { setIsCartOpen(false); navigate("/checkout"); }}>Proceed to Checkout</button>
+              <button
+                className="checkout-btn"
+                onClick={() => {
+                  setIsCartOpen(false);
+                  navigate("/checkout");
+                }}
+              >
+                Proceed to Checkout
+              </button>
             </div>
           )}
         </div>
@@ -356,7 +388,11 @@ const Header = () => {
               <div className="empty-state">
                 <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   <FaHeart size={80} color="#ccc" />
                 </motion.div>
@@ -377,10 +413,18 @@ const Header = () => {
                   <div key={item.id} className="drawer-item wishlist-item">
                     <div className="item-image">
                       <img
-                        src={item.image || (item.images && item.images[0]) || `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(item.name)}`}
+                        src={
+                          item.image ||
+                          (item.images && item.images[0]) ||
+                          `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(
+                            item.name
+                          )}`
+                        }
                         alt={item.name}
                         onError={(e) => {
-                          e.currentTarget.src = `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(item.name)}`;
+                          e.currentTarget.src = `https://placehold.co/300x200/eeeeee/999?text=${encodeURIComponent(
+                            item.name
+                          )}`;
                         }}
                       />
                     </div>

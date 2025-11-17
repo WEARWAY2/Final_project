@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
-import { FaHome } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import { FaHome } from "react-icons/fa";
 import "./NotFound.css";
 
 const NotFound = () => {
@@ -28,7 +28,11 @@ const NotFound = () => {
             <Link to="/" className="btn-primary">
               <motion.div
                 whileHover={{ scale: 1.1 }}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
               >
                 <FaHome size={20} />
               </motion.div>

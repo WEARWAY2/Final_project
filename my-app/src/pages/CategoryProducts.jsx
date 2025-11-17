@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { motion } from 'framer-motion';
-import { FaBars, FaTimes, FaHeart, FaShoppingCart } from 'react-icons/fa';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { motion } from "framer-motion";
+import { FaBars, FaTimes, FaHeart, FaShoppingCart } from "react-icons/fa";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useCart } from "../context/CartContext";
 import "./CategoryProducts.css";
 import { PRODUCTS } from "../config/products";
@@ -86,7 +86,10 @@ const CategoryProducts = () => {
     "4X-Large",
   ];
 
-  const allProducts = useMemo(() => PRODUCTS[category] || PRODUCTS.men, [category]);
+  const allProducts = useMemo(
+    () => PRODUCTS[category] || PRODUCTS.men,
+    [category]
+  );
 
   // Filter products
   useEffect(() => {
@@ -396,15 +399,23 @@ const CategoryProducts = () => {
                 {Math.min(endIndex, filteredProducts.length)} of{" "}
                 {filteredProducts.length} Products
               </span>
-              <div className="per-page-toggle" role="group" aria-label="Items per page">
+              <div
+                className="per-page-toggle"
+                role="group"
+                aria-label="Items per page"
+              >
                 <button
-                  className={`per-page-btn ${itemsPerPage === 6 ? "active" : ""}`}
+                  className={`per-page-btn ${
+                    itemsPerPage === 6 ? "active" : ""
+                  }`}
                   onClick={() => setItemsPerPage(6)}
                 >
                   6 / page
                 </button>
                 <button
-                  className={`per-page-btn ${itemsPerPage === 12 ? "active" : ""}`}
+                  className={`per-page-btn ${
+                    itemsPerPage === 12 ? "active" : ""
+                  }`}
                   onClick={() => setItemsPerPage(12)}
                 >
                   12 / page
@@ -437,7 +448,9 @@ const CategoryProducts = () => {
                   >
                     <div
                       className="product-image"
-                      onClick={() => navigate(`/shop/${category}/${product.id}`)}
+                      onClick={() =>
+                        navigate(`/shop/${category}/${product.id}`)
+                      }
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) => {
@@ -539,8 +552,14 @@ const CategoryProducts = () => {
                           >
                             <FaHeart
                               size={20}
-                              color={isInWishlist(product.id) ? "#ff4d4d" : "currentColor"}
-                              fill={isInWishlist(product.id) ? "#ff4d4d" : "none"}
+                              color={
+                                isInWishlist(product.id)
+                                  ? "#ff4d4d"
+                                  : "currentColor"
+                              }
+                              fill={
+                                isInWishlist(product.id) ? "#ff4d4d" : "none"
+                              }
                             />
                           </motion.div>
                         </button>

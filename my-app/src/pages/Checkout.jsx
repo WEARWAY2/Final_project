@@ -7,7 +7,7 @@ const formatPrice = (n) => `$${Number(n).toFixed(2).replace(/\.00$/, "")}`;
 
 const PROMO_CODES = {
   wearway25: 0.25,
-  wearway10: 0.10,
+  wearway10: 0.1,
   wearway5: 0.05,
   free: 1.0,
 };
@@ -26,7 +26,10 @@ const Checkout = () => {
   const [appliedPromo, setAppliedPromo] = React.useState(null);
   const [promoMsg, setPromoMsg] = React.useState("");
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const discountRate = appliedPromo ? PROMO_CODES[appliedPromo] : 0.2;
   const discountValue = Math.round(subtotal * discountRate);
   const deliveryFee = cartItems.length > 0 ? 15 : 0;
@@ -59,34 +62,64 @@ const Checkout = () => {
           {cartItems.length === 0 ? (
             <div className="empty-state">
               <p>Your cart is empty.</p>
-              <Link to="/shop" className="link">Continue shopping →</Link>
+              <Link to="/shop" className="link">
+                Continue shopping →
+              </Link>
             </div>
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="ci-row">
                 <img
                   className="ci-thumb"
-                  src={item.image || (item.images && item.images[0]) || `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`}
+                  src={
+                    item.image ||
+                    (item.images && item.images[0]) ||
+                    `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(
+                      item.name
+                    )}`
+                  }
                   alt={item.name}
                   onError={(e) => {
-                    e.currentTarget.src = `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(item.name)}`;
+                    e.currentTarget.src = `https://placehold.co/160x160/eeeeee/999?text=${encodeURIComponent(
+                      item.name
+                    )}`;
                   }}
                 />
                 <div className="ci-info">
                   <h3 className="ci-title">{item.name}</h3>
                   <div className="ci-attrs">
-                    {item.selectedSize && <span>Size: {item.selectedSize}</span>}
-                    {item.selectedColor && <span>Color: {item.selectedColor}</span>}
+                    {item.selectedSize && (
+                      <span>Size: {item.selectedSize}</span>
+                    )}
+                    {item.selectedColor && (
+                      <span>Color: {item.selectedColor}</span>
+                    )}
                   </div>
                   <div className="ci-price">{formatPrice(item.price)}</div>
                 </div>
                 <div className="ci-actions">
                   <div className="qty">
-                    <button onClick={() => decreaseQuantity(item.id)} aria-label="Decrease">−</button>
+                    <button
+                      onClick={() => decreaseQuantity(item.id)}
+                      aria-label="Decrease"
+                    >
+                      −
+                    </button>
                     <span className="qty-val">{item.quantity}</span>
-                    <button onClick={() => increaseQuantity(item.id)} aria-label="Increase">＋</button>
+                    <button
+                      onClick={() => increaseQuantity(item.id)}
+                      aria-label="Increase"
+                    >
+                      ＋
+                    </button>
                   </div>
-                  <button className="ci-remove" onClick={() => removeFromCart(item.id)} aria-label="Remove">🗑</button>
+                  <button
+                    className="ci-remove"
+                    onClick={() => removeFromCart(item.id)}
+                    aria-label="Remove"
+                  >
+                    🗑
+                  </button>
                 </div>
               </div>
             ))
@@ -102,7 +135,10 @@ const Checkout = () => {
           </div>
           <div className="os-row">
             <span>
-              Discount {appliedPromo ? `(-${Math.round(PROMO_CODES[appliedPromo]*100)}%)` : "(-20%)"}
+              Discount{" "}
+              {appliedPromo
+                ? `(-${Math.round(PROMO_CODES[appliedPromo] * 100)}%)`
+                : "(-20%)"}
             </span>
             <span className="neg">-{formatPrice(discountValue)}</span>
           </div>
@@ -115,13 +151,12 @@ const Checkout = () => {
             <span>{formatPrice(total)}</span>
           </div>
 
-
           <div className="promo">
             <input
               type="text"
               placeholder="Add promo code"
               value={promoInput}
-              onChange={e => setPromoInput(e.target.value)}
+              onChange={(e) => setPromoInput(e.target.value)}
               disabled={!!appliedPromo}
             />
             <button
@@ -134,7 +169,9 @@ const Checkout = () => {
             </button>
           </div>
           {promoMsg && (
-            <div className={`promo-msg${appliedPromo ? " success" : " error"}`}>{promoMsg}</div>
+            <div className={`promo-msg${appliedPromo ? " success" : " error"}`}>
+              {promoMsg}
+            </div>
           )}
 
           <button
