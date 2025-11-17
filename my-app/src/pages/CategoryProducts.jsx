@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaBars, FaTimes, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
@@ -10,6 +10,7 @@ import { PRODUCTS } from "../config/products";
 const CategoryProducts = () => {
   const { category } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { addToCart, addToWishlist, isInWishlist } = useCart();
   const [priceRange, setPriceRange] = useState([0, 500]);
   const [selectedColors, setSelectedColors] = useState([]);
@@ -90,6 +91,14 @@ const CategoryProducts = () => {
     () => PRODUCTS[category] || PRODUCTS.men,
     [category]
   );
+
+  // Handle URL parameter for category filter on initial load
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setSelectedCategories([categoryParam]);
+    }
+  }, [searchParams]);
 
   // Filter products
   useEffect(() => {
