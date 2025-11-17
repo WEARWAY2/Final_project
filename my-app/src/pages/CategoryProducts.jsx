@@ -552,7 +552,10 @@ const CategoryProducts = () => {
                           className={`action-btn wishlist-btn ${
                             isInWishlist(product.id) ? "active" : ""
                           }`}
-                          onClick={() => handleAddToWishlist(product)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddToWishlist(product);
+                          }}
                           title="Add to Wishlist"
                         >
                           <motion.div
@@ -571,7 +574,10 @@ const CategoryProducts = () => {
                         </button>
                         <button
                           className="action-btn cart-btn"
-                          onClick={() => handleAddToCart(product)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleAddToCart(product);
+                          }}
                           title="Add to Cart"
                         >
                           <motion.div
