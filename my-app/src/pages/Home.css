@@ -391,12 +391,20 @@ body {
 .top-selling-section {
   background-color: var(--color-light);
 }
+
 .top-selling-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 250px 250px;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  grid-auto-rows: 320px;
 }
+
+/* Featured card takes up 2 columns and 2 rows on larger screens */
+.selling-card.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
 .selling-card {
   position: relative;
   border-radius: 20px;
@@ -407,37 +415,345 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem;
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease;
 }
+
 .selling-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  z-index: 10;
 }
-.selling-card::after {
-  content: "";
+
+.selling-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.7)
+  );
+  transition: background 0.4s ease;
 }
+
+.selling-card:hover .selling-card-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.85)
+  );
+}
+
 .selling-card-content {
   position: relative;
   z-index: 2;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }
+
+.selling-card:hover .selling-card-content {
+  transform: translateY(-5px);
+}
+
+.selling-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.selling-card-badge svg {
+  color: #ffd700;
+}
+
 .selling-card h3 {
-  margin: 0 0 0.25rem 0;
+  margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
 }
-.selling-card p {
+
+.selling-card.featured h3 {
+  font-size: 2.2rem;
+}
+
+.selling-card-category {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   opacity: 0.9;
+  text-transform: capitalize;
+  font-weight: 500;
 }
-.selling-card.large {
-  grid-row: span 2;
+
+.selling-card-pricing {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
-.selling-card.large h3 {
-  font-size: 2rem;
+
+.selling-card-price {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.selling-card-original-price {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.selling-card-discount {
+  display: inline-block;
+  background: #ff4444;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-top: 0.5rem;
+}
+
+.selling-card-cta {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-light);
+  color: var(--color-dark);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.selling-card-cta:hover {
+  background: var(--color-dark);
+  color: var(--color-light);
+  transform: translateY(-2px);
+}
+
+.selling-card:focus {
+  outline: 3px solid #4a90e2;
+  outline-offset: 3px;
+}
+
+/* --- Featured Collections Section --- */
+.featured-collections {
+  background-color: var(--color-bg);
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.collection-tile {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-light);
+  text-decoration: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.collection-tile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.collection-tile:focus {
+  outline: 3px solid #4a90e2;
+  outline-offset: 3px;
+}
+
+.collection-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.7)
+  );
+  transition: background 0.4s ease;
+}
+
+.collection-tile:hover .collection-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.85)
+  );
+}
+
+.collection-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.collection-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.collection-content p {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+.collection-cta {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid var(--color-light);
+  transition: padding-left 0.3s ease;
+}
+
+.collection-tile:hover .collection-cta {
+  padding-left: 0.5rem;
+}
+
+/* --- Newsletter Band --- */
+.newsletter-band {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 4rem 0;
+  color: var(--color-light);
+}
+
+.newsletter-content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem 0;
+  color: var(--color-light);
+}
+
+.newsletter-description {
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.newsletter-input:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.newsletter-button {
+  padding: 1rem 2rem;
+  background: var(--color-dark);
+  color: var(--color-light);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.newsletter-button:hover:not(:disabled) {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.newsletter-button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+.newsletter-message {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 1.5rem;
+}
+
+/* --- Accessibility Improvements --- */
+.product-card-home:focus {
+  outline: 3px solid #4a90e2;
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marquee-content {
+    animation: none;
+  }
 }
 
 /* --- Perks Section --- */
@@ -492,13 +808,15 @@ body {
     grid-template-columns: repeat(3, 1fr);
   }
   .top-selling-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 280px;
   }
-  .selling-card.large {
-    grid-row: span 1;
+  .selling-card.featured {
     grid-column: span 2;
-    min-height: 400px;
+    grid-row: span 1;
+  }
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -534,11 +852,23 @@ body {
     grid-template-columns: 1fr;
   }
   .top-selling-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 250px;
+  }
+  .selling-card.featured {
+    grid-column: span 2;
+  }
+  .collections-grid {
     grid-template-columns: 1fr;
   }
-  .selling-card.large {
-    grid-column: span 1;
+  .collection-tile {
     min-height: 350px;
+  }
+  .newsletter-form {
+    flex-direction: column;
+  }
+  .newsletter-button {
+    width: 100%;
   }
 }
 
@@ -574,6 +904,15 @@ body {
   .p-info {
     padding: 0.75rem 1rem;
   }
+  .newsletter-title {
+    font-size: 2rem;
+  }
+  .newsletter-description {
+    font-size: 1rem;
+  }
+  .newsletter-band {
+    padding: 3rem 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -602,12 +941,25 @@ body {
   .brand-logo svg {
     max-width: 100px;
   }
+  .top-selling-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 300px;
+  }
+  .selling-card.featured {
+    grid-column: span 1;
+  }
+  .selling-card h3 {
+    font-size: 1.3rem;
+  }
+  .selling-card.featured h3 {
+    font-size: 1.6rem;
+  }
 }
 /* Home.css - Add or replace the existing .perks styles with this */
 
 /* --- Enhanced Perks Section --- */
 .perks-section {
-  background-color: #f0f2f5; /* A slightly different background to make the section pop */
+  background-color: var(--color-bg-alt); /* align with theme variables */
   padding: 6rem 0;
   position: relative;
   overflow: hidden;
@@ -670,9 +1022,11 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px); /* The key to the glassmorphism effect */
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+  transition: opacity 0.6s ease, transform 0.6s ease,
     box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   overflow: hidden; /* To contain the animated border */
+  opacity: 0; /* for staggered reveal */
+  transform: translateY(20px);
 }
 
 /* The animated gradient border */
@@ -700,6 +1054,30 @@ body {
 .perk-card:hover::before {
   opacity: 1;
   animation: rotate 4s linear infinite; /* Re-using the rotate keyframes */
+}
+
+/* Staggered entrance when section becomes visible */
+.perks-section.visible .perk-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.perks-section.visible .perk-card:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.perks-section.visible .perk-card:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.perks-section.visible .perk-card:nth-child(3) {
+  transition-delay: 0.25s;
+}
+.perks-section.visible .perk-card:nth-child(4) {
+  transition-delay: 0.35s;
+}
+.perks-section.visible .perk-card:nth-child(5) {
+  transition-delay: 0.45s;
+}
+.perks-section.visible .perk-card:nth-child(6) {
+  transition-delay: 0.55s;
 }
 
 .perk-icon-wrapper {
