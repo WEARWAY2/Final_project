@@ -48,21 +48,15 @@ const Header = () => {
   const categoryData = {
     men: {
       featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['T-Shirts', 'Shirts', 'Jeans', 'Jackets', 'Sweaters'],
-      footwear: ['Sneakers', 'Boots', 'Sandals', 'Formal Shoes'],
-      accessories: ['Watches', 'Bags', 'Belts', 'Sunglasses']
+      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
     },
     women: {
       featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['Dresses', 'Tops', 'Jeans', 'Jackets', 'Skirts'],
-      footwear: ['Heels', 'Sneakers', 'Boots', 'Sandals'],
-      accessories: ['Handbags', 'Jewelry', 'Scarves', 'Sunglasses']
+      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
     },
     kids: {
       featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['T-Shirts', 'Pants', 'Dresses', 'Jackets'],
-      footwear: ['Sneakers', 'Sandals', 'Boots'],
-      accessories: ['Bags', 'Hats', 'Socks']
+      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
     }
   };
 
@@ -198,27 +192,7 @@ const Header = () => {
                     <ul>
                       {categoryData.men.clothing.map(item => (
                         <li key={item}>
-                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Footwear</h4>
-                    <ul>
-                      {categoryData.men.footwear.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Accessories</h4>
-                    <ul>
-                      {categoryData.men.accessories.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/men?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>
@@ -253,27 +227,7 @@ const Header = () => {
                     <ul>
                       {categoryData.women.clothing.map(item => (
                         <li key={item}>
-                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Footwear</h4>
-                    <ul>
-                      {categoryData.women.footwear.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Accessories</h4>
-                    <ul>
-                      {categoryData.women.accessories.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/women?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>
@@ -308,27 +262,7 @@ const Header = () => {
                     <ul>
                       {categoryData.kids.clothing.map(item => (
                         <li key={item}>
-                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Footwear</h4>
-                    <ul>
-                      {categoryData.kids.footwear.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dropdown-column">
-                    <h4>Accessories</h4>
-                    <ul>
-                      {categoryData.kids.accessories.map(item => (
-                        <li key={item}>
-                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/kids?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>
