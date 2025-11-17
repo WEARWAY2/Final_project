@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { FaTruck, FaUndo, FaLock, FaHeadset, FaStar } from 'react-icons/fa';
+import { IoSparkles } from 'react-icons/io5';
 import "./Home.css";
 
 // Asset Imports
@@ -260,10 +263,35 @@ const Home = () => {
 
           <div className="hero-image">
             <div className="star-decoration star-top">
-              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28 0L32.6 23.4L56 28L32.6 32.6L28 56L23.4 32.6L0 28L23.4 23.4L28 0Z" fill="black"/></svg>
+              <motion.div
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <IoSparkles size={56} color="#000" />
+              </motion.div>
             </div>
             <div className="star-decoration star-small">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 0L23.2857 16.7143L40 20L23.2857 23.2857L20 40L16.7143 23.2857L0 20L16.7143 16.7143L20 0Z" fill="black"/></svg>
+              <motion.div
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.3, 1]
+                }}
+                transition={{ 
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              >
+                <IoSparkles size={40} color="#000" />
+              </motion.div>
             </div>
             <img
               src={heroImage}
@@ -358,9 +386,20 @@ const Home = () => {
                   <div className="selling-card-overlay"></div>
                   <div className="selling-card-content">
                     <div className="selling-card-badge">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                      </svg>
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 5, -5, 0]
+                        }}
+                        transition={{ 
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        style={{ display: 'inline-flex' }}
+                      >
+                        <FaStar size={16} color="#FFD700" />
+                      </motion.div>
                       <span>{product.rating}</span>
                     </div>
                     <h3>{product.name}</h3>
@@ -418,12 +457,19 @@ const Home = () => {
       {/* Free Shipping */}
       <div className="perk-card" role="listitem" aria-label="Free shipping on orders over $100">
         <div className="perk-icon-wrapper" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
-            <path d="M14 9h4l4 4v4h-8v-8Z"/>
-            <circle cx="7.5" cy="18.5" r="2.5"/>
-            <circle cx="17.5" cy="18.5" r="2.5"/>
-          </svg>
+          <motion.div
+            animate={{ 
+              x: [0, 10, 0],
+              y: [0, -5, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <FaTruck size={28} />
+          </motion.div>
         </div>
         <h4 className="perk-card-title">Free Shipping</h4>
         <p className="perk-card-description">Free on orders over $100 — quick, reliable delivery.</p>
@@ -432,11 +478,18 @@ const Home = () => {
       {/* Easy Returns */}
       <div className="perk-card" role="listitem" aria-label="30-day hassle-free returns">
         <div className="perk-icon-wrapper" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M16 3h5v5"/>
-            <path d="M21 3 8.5 15.5"/>
-            <path d="M12 21a9 9 0 1 1 0-18"/>
-          </svg>
+          <motion.div
+            animate={{ 
+              rotate: [0, 360]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <FaUndo size={28} />
+          </motion.div>
         </div>
         <h4 className="perk-card-title">30-Day Returns</h4>
         <p className="perk-card-description">Changed your mind? Send it back within 30 days.</p>
@@ -445,10 +498,19 @@ const Home = () => {
       {/* Secure Checkout */}
       <div className="perk-card" role="listitem" aria-label="Secure checkout with encryption">
         <div className="perk-icon-wrapper" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
+          <motion.div
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, -5, 5, 0]
+            }}
+            transition={{ 
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <FaLock size={28} />
+          </motion.div>
         </div>
         <h4 className="perk-card-title">Secure Checkout</h4>
         <p className="perk-card-description">SSL-encrypted payments to keep your data safe.</p>
@@ -457,13 +519,22 @@ const Home = () => {
       {/* 24/7 Support */}
       <div className="perk-card" role="listitem" aria-label="24/7 customer support">
         <div className="perk-icon-wrapper" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 18v-5a3 3 0 1 1 6 0v5"/>
-            <path d="M19 10a7 7 0 1 0-14 0v3H3a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-2v-3z"/>
-          </svg>
+          <motion.div
+            animate={{ 
+              y: [0, -8, 0],
+              rotate: [0, 10, -10, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <FaHeadset size={28} />
+          </motion.div>
         </div>
         <h4 className="perk-card-title">24/7 Support</h4>
-        <p className="perk-card-description">We’re here anytime via chat or email if you need help.</p>
+        <p className="perk-card-description">We're here anytime via chat or email if you need help.</p>
       </div>
     </div>
   </div>

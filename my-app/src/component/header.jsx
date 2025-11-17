@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { FaSearch, FaShoppingCart, FaHeart, FaUser, FaTimes, FaPlus, FaMinus } from 'react-icons/fa';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useCart } from "../context/CartContext";
 import { PRODUCTS } from "../config/products";
 import "./header.css";
@@ -120,28 +123,12 @@ const Header = () => {
 
         {/* Search Bar */}
         <div className="search-bar">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <path
-              d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
-              stroke="#666"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M19 19L14.65 14.65"
-              stroke="#666"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            <FaSearch size={20} color="#666" />
+          </motion.div>
           <input
             type="text"
             placeholder="Search for products..."
@@ -200,30 +187,12 @@ const Header = () => {
             aria-label="Shopping Cart"
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <path
-                d="M9 2L7 6H21L19 2H9Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 6H22L20 18H8L6 6Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="9" cy="21" r="1" fill="currentColor" />
-              <circle cx="19" cy="21" r="1" fill="currentColor" />
-            </svg>
+              <FaShoppingCart size={24} />
+            </motion.div>
             {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </button>
           <button
@@ -231,47 +200,25 @@ const Header = () => {
             aria-label="Wishlist"
             onClick={() => setIsWishlistOpen(!isWishlistOpen)}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{ scale: wishlistCount > 0 ? [1, 1.1, 1] : 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+              <FaHeart size={24} color={wishlistCount > 0 ? "#ff4d4d" : "currentColor"} />
+            </motion.div>
             {wishlistCount > 0 && (
               <span className="badge">{wishlistCount}</span>
             )}
           </button>
           <button className="icon-button" aria-label="User Account" onClick={() => navigate("/checkout")}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <circle
-                cx="12"
-                cy="8"
-                r="4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M6 21C6 17.134 8.686 14 12 14C15.314 14 18 17.134 18 21"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
+              <FaUser size={24} />
+            </motion.div>
           </button>
         </div>
       </div>
@@ -286,33 +233,18 @@ const Header = () => {
           <div className="drawer-header">
             <h2>Shopping Cart ({cartCount})</h2>
             <button className="close-btn" onClick={() => setIsCartOpen(false)}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <FaTimes size={24} />
             </button>
           </div>
           <div className="drawer-body">
             {cartItems.length === 0 ? (
               <div className="empty-state">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 2L7 6H21L19 2H9Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M6 6H22L20 18H8L6 6Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <circle cx="9" cy="21" r="1" fill="currentColor" />
-                  <circle cx="19" cy="21" r="1" fill="currentColor" />
-                </svg>
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <FaShoppingCart size={80} color="#ccc" />
+                </motion.div>
                 <p>Your cart is empty</p>
                 <button
                   className="continue-shopping-btn"
@@ -354,19 +286,7 @@ const Header = () => {
                           onClick={() => decreaseQuantity(item.id)}
                           title="Decrease"
                         >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <path
-                              d="M5 12h14"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                          </svg>
+                          <FaMinus size={16} />
                         </button>
                         <span className="quantity-display">
                           {item.quantity}
@@ -376,19 +296,7 @@ const Header = () => {
                           onClick={() => increaseQuantity(item.id)}
                           title="Increase"
                         >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <path
-                              d="M12 5v14M5 12h14"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                          </svg>
+                          <FaPlus size={16} />
                         </button>
                       </div>
                       <p className="item-total">
@@ -403,19 +311,7 @@ const Header = () => {
                       onClick={() => removeFromCart(item.id)}
                       title="Remove"
                     >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M18 6L6 18M6 6l12 12"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
+                      <FaTimes size={20} />
                     </button>
                   </div>
                 ))}
@@ -452,26 +348,18 @@ const Header = () => {
               className="close-btn"
               onClick={() => setIsWishlistOpen(false)}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <FaTimes size={24} />
             </button>
           </div>
           <div className="drawer-body">
             {wishlistItems.length === 0 ? (
               <div className="empty-state">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                </svg>
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <FaHeart size={80} color="#ccc" />
+                </motion.div>
                 <p>Your wishlist is empty</p>
                 <button
                   className="continue-shopping-btn"
@@ -510,29 +398,7 @@ const Header = () => {
                         className="add-to-cart-btn"
                         onClick={() => handleAddToCartFromWishlist(item)}
                       >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M9 2L7 6H21L19 2H9Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M6 6H22L20 18H8L6 6Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <circle cx="9" cy="21" r="1" fill="currentColor" />
-                          <circle cx="19" cy="21" r="1" fill="currentColor" />
-                        </svg>
+                        <FaShoppingCart size={16} />
                         Add to Cart
                       </button>
                     </div>
@@ -541,19 +407,7 @@ const Header = () => {
                       onClick={() => removeFromWishlist(item.id)}
                       title="Remove"
                     >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M18 6L6 18M6 6l12 12"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
+                      <FaTimes size={20} />
                     </button>
                   </div>
                 ))}

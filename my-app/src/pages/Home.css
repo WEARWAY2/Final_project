@@ -1029,31 +1029,11 @@ body {
   transform: translateY(20px);
 }
 
-/* The animated gradient border */
-.perk-card::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -2px;
-  border-radius: 26px; /* Slightly larger than the card's border-radius */
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    #00c2ff 0%,
-    #ff00b8 50%,
-    #ffc700 100%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+
 
 .perk-card:hover {
   transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
   box-shadow: 0 20px 40px rgba(31, 38, 135, 0.2);
-}
-
-.perk-card:hover::before {
-  opacity: 1;
-  animation: rotate 4s linear infinite; /* Re-using the rotate keyframes */
 }
 
 /* Staggered entrance when section becomes visible */

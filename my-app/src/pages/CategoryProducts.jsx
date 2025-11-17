@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { FaBars, FaTimes, FaHeart, FaShoppingCart } from 'react-icons/fa';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useCart } from "../context/CartContext";
 import "./CategoryProducts.css";
 import { PRODUCTS } from "../config/products";
@@ -247,14 +250,7 @@ const CategoryProducts = () => {
         className="mobile-filter-toggle"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path
-            d="M2 5h16M2 10h16M2 15h16"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
+        <FaBars size={20} />
         Filters
       </button>
 
@@ -275,14 +271,7 @@ const CategoryProducts = () => {
               className="filter-close-btn"
               onClick={() => setIsSidebarOpen(false)}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <FaTimes size={24} />
             </button>
           </div>
 
@@ -487,20 +476,7 @@ const CategoryProducts = () => {
                               }}
                               aria-label="Previous image"
                             >
-                              <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                              >
-                                <path
-                                  d="M15 18L9 12L15 6"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
+                              <MdChevronLeft size={24} />
                             </button>
                             <button
                               className="slider-arrow slider-arrow-next"
@@ -514,20 +490,7 @@ const CategoryProducts = () => {
                               }}
                               aria-label="Next image"
                             >
-                              <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                              >
-                                <path
-                                  d="M9 18L15 12L9 6"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
+                              <MdChevronRight size={24} />
                             </button>
                           </>
                         )}
@@ -570,53 +533,28 @@ const CategoryProducts = () => {
                           onClick={() => handleAddToWishlist(product)}
                           title="Add to Wishlist"
                         >
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill={
-                              isInWishlist(product.id) ? "currentColor" : "none"
-                            }
-                            xmlns="http://www.w3.org/2000/svg"
+                          <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
                           >
-                            <path
-                              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                            <FaHeart
+                              size={20}
+                              color={isInWishlist(product.id) ? "#ff4d4d" : "currentColor"}
+                              fill={isInWishlist(product.id) ? "#ff4d4d" : "none"}
                             />
-                          </svg>
+                          </motion.div>
                         </button>
                         <button
                           className="action-btn cart-btn"
                           onClick={() => handleAddToCart(product)}
                           title="Add to Cart"
                         >
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                          <motion.div
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
                           >
-                            <path
-                              d="M9 2L7 6H21L19 2H9Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M6 6H22L20 18H8L6 6Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <circle cx="9" cy="21" r="1" fill="currentColor" />
-                            <circle cx="19" cy="21" r="1" fill="currentColor" />
-                          </svg>
+                            <FaShoppingCart size={20} />
+                          </motion.div>
                         </button>
                       </div>
                     </div>

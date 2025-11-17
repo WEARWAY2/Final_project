@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { FaHome } from 'react-icons/fa';
 import "./NotFound.css";
 
 const NotFound = () => {
@@ -24,35 +26,12 @@ const NotFound = () => {
           {/* Action Buttons */}
           <div className="error-actions">
             <Link to="/" className="btn-primary">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
-                <path
-                  d="M10 18V10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M10 2L2 8L10 10L18 8L10 2Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M2 12L10 18L18 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+                <FaHome size={20} />
+              </motion.div>
               Back to Home
             </Link>
             <Link to="/shop" className="btn-secondary">

@@ -5,6 +5,13 @@ import "./Checkout.css";
 
 const formatPrice = (n) => `$${Number(n).toFixed(2).replace(/\.00$/, "")}`;
 
+const PROMO_CODES = {
+  wearway25: 0.25,
+  wearway10: 0.10,
+  wearway5: 0.05,
+  free: 1.0,
+};
+
 const Checkout = () => {
   const navigate = useNavigate();
   const {
@@ -15,11 +22,30 @@ const Checkout = () => {
     clearCart,
   } = useCart();
 
+  const [promoInput, setPromoInput] = React.useState("");
+  const [appliedPromo, setAppliedPromo] = React.useState(null);
+  const [promoMsg, setPromoMsg] = React.useState("");
+
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const discountRate = 0.2; // 20%
+  const discountRate = appliedPromo ? PROMO_CODES[appliedPromo] : 0.2;
   const discountValue = Math.round(subtotal * discountRate);
   const deliveryFee = cartItems.length > 0 ? 15 : 0;
   const total = Math.max(0, subtotal - discountValue + deliveryFee);
+
+  const handleApplyPromo = () => {
+    const code = promoInput.trim().toLowerCase();
+    if (PROMO_CODES[code]) {
+      setAppliedPromo(code);
+      setPromoMsg(
+        code === "free"
+          ? "100% discount applied!"
+          : `Promo code applied: ${Math.round(PROMO_CODES[code] * 100)}% off`
+      );
+    } else {
+      setPromoMsg("Invalid promo code");
+      setAppliedPromo(null);
+    }
+  };
 
   return (
     <div className="checkout-page">
@@ -75,7 +101,9 @@ const Checkout = () => {
             <span>{formatPrice(subtotal)}</span>
           </div>
           <div className="os-row">
-            <span>Discount (-20%)</span>
+            <span>
+              Discount {appliedPromo ? `(-${Math.round(PROMO_CODES[appliedPromo]*100)}%)` : "(-20%)"}
+            </span>
             <span className="neg">-{formatPrice(discountValue)}</span>
           </div>
           <div className="os-row">
@@ -87,10 +115,27 @@ const Checkout = () => {
             <span>{formatPrice(total)}</span>
           </div>
 
+
           <div className="promo">
-            <input type="text" placeholder="Add promo code" />
-            <button className="btn-ghost" type="button">Apply</button>
+            <input
+              type="text"
+              placeholder="Add promo code"
+              value={promoInput}
+              onChange={e => setPromoInput(e.target.value)}
+              disabled={!!appliedPromo}
+            />
+            <button
+              className="btn-ghost"
+              type="button"
+              onClick={handleApplyPromo}
+              disabled={!!appliedPromo}
+            >
+              {appliedPromo ? "Applied" : "Apply"}
+            </button>
           </div>
+          {promoMsg && (
+            <div className={`promo-msg${appliedPromo ? " success" : " error"}`}>{promoMsg}</div>
+          )}
 
           <button
             className="btn-primary block"
