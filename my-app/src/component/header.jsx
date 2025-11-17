@@ -33,7 +33,29 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    // Trigger fade-in animation on mount
+    const timer = setTimeout(() => setIsVisible(true), 100);
+
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Live search handler
   const handleSearchChange = (e) => {
@@ -113,7 +135,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${isScrolled ? "header-scrolled" : ""} ${isVisible ? "header-visible" : ""}`}>
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
