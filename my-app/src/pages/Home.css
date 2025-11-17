@@ -85,7 +85,7 @@ body {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: var(--color-dark);
+  color: #000000;
   margin: 0;
   letter-spacing: -2.5px;
   animation-delay: 0.2s;

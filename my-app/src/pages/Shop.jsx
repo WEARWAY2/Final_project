@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Shop.css";
 
 const Shop = () => {
   const navigate = useNavigate();
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const categories = [
     {
       id: "men",
       title: "Men",
-      description: "Explore our collection of men's fashion",
-      image: "/men-category.jpg",
+      subtitle: "Refined & Sophisticated",
+      icon: "👔",
+      image: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=1200&auto=format&fit=crop",
+      overlayGradient: "linear-gradient(135deg, rgba(30, 60, 114, 0.7) 0%, rgba(42, 82, 152, 0.8) 100%)",
     },
     {
       id: "women",
       title: "Women",
-      description: "Discover stylish women's clothing",
-      image: "/women-category.jpg",
+      subtitle: "Elegant & Timeless",
+      icon: "👗",
+      image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop",
+      overlayGradient: "linear-gradient(135deg, rgba(142, 45, 226, 0.7) 0%, rgba(196, 113, 237, 0.8) 100%)",
     },
     {
       id: "kids",
       title: "Kids",
-      description: "Find trendy outfits for kids",
-      image: "/kids-category.jpg",
+      subtitle: "Playful & Vibrant",
+      icon: "🎈",
+      image: "https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?q=80&w=1200&auto=format&fit=crop",
+      overlayGradient: "linear-gradient(135deg, rgba(0, 180, 219, 0.7) 0%, rgba(0, 131, 176, 0.8) 100%)",
     },
   ];
 
@@ -31,27 +38,66 @@ const Shop = () => {
   };
 
   return (
-    <div className="shop-page">
-      <div className="shop-container">
-        <h1 className="shop-title">Shop by Category</h1>
-        <p className="shop-description">
-          Choose your preferred category to explore our collection
-        </p>
+    <div className="shop-hero">
+      <div className="shop-hero-background">
+        <div className="hero-gradient-overlay"></div>
+      </div>
 
-        <div className="category-cards">
-          {categories.map((category) => (
+      <div className="shop-hero-content">
+        <div className="hero-header">
+          <h1 className="hero-title">Choose Your Category</h1>
+          <p className="hero-subtitle">Discover curated collections designed for you</p>
+        </div>
+
+        <div className="category-grid">
+          {categories.map((category, index) => (
             <div
               key={category.id}
-              className="category-card"
+              className={`category-item ${hoveredCard === category.id ? 'hovered' : ''}`}
               onClick={() => handleCategoryClick(category.id)}
+              onMouseEnter={() => setHoveredCard(category.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              style={{
+                animationDelay: `${index * 0.1}s`,
+              }}
             >
-              <div className="category-image">
-                <div className="category-overlay">
-                  <h2 className="category-title">{category.title}</h2>
-                  <p className="category-desc">{category.description}</p>
-                  <button className="category-button">Shop Now</button>
+              <div 
+                className="category-background" 
+                style={{ 
+                  backgroundImage: `url(${category.image})`,
+                }}
+              >
+                <div className="category-image-overlay" style={{ background: category.overlayGradient }}></div>
+                <div className="category-shimmer"></div>
+              </div>
+              
+              <div className="category-content">
+                <div className="category-icon-wrapper">
+                  <span className="category-icon">{category.icon}</span>
+                </div>
+                
+                <div className="category-text">
+                  <h2 className="category-name">{category.title}</h2>
+                  <p className="category-tagline">{category.subtitle}</p>
+                </div>
+
+                <div className="category-cta">
+                  <span className="cta-text">Explore Collection</span>
+                  <svg 
+                    className="cta-arrow" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </div>
               </div>
+
+              <div className="category-shine"></div>
             </div>
           ))}
         </div>
