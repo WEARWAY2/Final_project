@@ -13,14 +13,10 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(250, 250, 250, 0.98) 100%
-  );
-  border-bottom: 1px solid rgba(229, 229, 229, 0.8);
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(12px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
@@ -36,9 +32,9 @@ body {
 
 /* Scrolled state - shrink and enhance shadow */
 .header.header-scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
-  border-bottom-color: rgba(229, 229, 229, 0.6);
+  background: var(--bg-header);
+  box-shadow: var(--shadow-lg);
+  border-bottom-color: var(--border-color);
 }
 
 .header.header-scrolled .header-container {
@@ -79,7 +75,11 @@ body {
   font-size: 2.25rem;
   font-weight: 900;
   margin: 0;
-  background: linear-gradient(135deg, #000 0%, #333 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -172,7 +172,7 @@ body {
 
 /* Active link styling */
 .nav-item.active {
-  color: #000;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -187,9 +187,9 @@ body {
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0;
-  background: #fff;
+  background: var(--bg-dropdown);
   border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
   opacity: 1;
   visibility: visible;
   z-index: 1000;
@@ -235,11 +235,11 @@ body {
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #000;
+  color: var(--text-primary);
   margin: 0 0 1rem 0;
   letter-spacing: 0.5px;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--accent-primary);
 }
 
 .dropdown-column ul {
@@ -256,7 +256,7 @@ body {
 }
 
 .dropdown-column li a {
-  color: #555;
+  color: var(--text-tertiary);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -1398,4 +1398,219 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===================================
+   DARK MODE THEME STYLES
+   =================================== */
+
+/* Search Bar Dark Mode */
+.dark-theme .search-bar {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+.dark-theme .search-bar:focus-within {
+  border-color: var(--accent-primary);
+  background: var(--input-focus-bg);
+}
+
+.dark-theme .search-input {
+  color: var(--text-primary);
+}
+
+.dark-theme .search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Icon Buttons Dark Mode */
+.dark-theme .icon-button {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-theme .icon-button:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+}
+
+/* Theme Toggle Button Specific Styling */
+.theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle svg {
+  color: #000000;
+}
+
+.dark-theme .theme-toggle svg {
+  color: #ffffff;
+}
+
+/* Mobile Menu Dark Mode */
+.dark-theme .mobile-menu {
+  background: var(--bg-header);
+}
+
+.dark-theme .mobile-nav-item {
+  color: var(--text-secondary);
+}
+
+.dark-theme .mobile-nav-item:hover,
+.dark-theme .mobile-nav-item:active {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.dark-theme .hamburger-line {
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
+}
+
+/* Drawer Dark Mode */
+.dark-theme .drawer-content {
+  background: var(--bg-drawer);
+}
+
+.dark-theme .drawer-header {
+  background: var(--bg-drawer);
+  border-bottom-color: var(--border-color);
+}
+
+.dark-theme .drawer-body {
+  background: var(--bg-drawer);
+}
+
+.dark-theme .drawer-footer {
+  background: var(--bg-drawer);
+  border-top-color: var(--border-color);
+}
+
+.dark-theme .drawer-item {
+  background: var(--bg-card);
+}
+
+.dark-theme .drawer-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.dark-theme .close-btn:hover {
+  background: var(--bg-tertiary);
+}
+
+/* Search Results Dark Mode */
+.dark-theme .search-results {
+  background: var(--bg-dropdown);
+}
+
+.dark-theme .search-result-item {
+  border-bottom-color: var(--border-light);
+}
+
+.dark-theme .search-result-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.dark-theme .search-result-info h4 {
+  color: var(--text-primary);
+}
+
+.dark-theme .search-result-category {
+  color: var(--text-tertiary);
+}
+
+.dark-theme .search-result-price {
+  color: var(--text-primary);
+}
+
+.dark-theme .search-view-all {
+  border-top-color: var(--border-light);
+}
+
+.dark-theme .search-view-all a {
+  color: var(--accent-primary);
+}
+
+.dark-theme .search-view-all a:hover {
+  color: var(--accent-hover);
+}
+
+.dark-theme .search-no-results p {
+  color: var(--text-tertiary);
+}
+
+/* Button Styles Dark Mode */
+.dark-theme .checkout-btn,
+.dark-theme .continue-shopping-btn,
+.dark-theme .add-to-cart-btn {
+  background: var(--accent-primary);
+}
+
+.dark-theme .checkout-btn:hover,
+.dark-theme .continue-shopping-btn:hover,
+.dark-theme .add-to-cart-btn:hover {
+  background: var(--accent-hover);
+}
+
+.dark-theme .clear-cart-btn {
+  color: #ff4444;
+  border-color: #ff4444;
+}
+
+.dark-theme .clear-cart-btn:hover {
+  background: #ff4444;
+  color: #fff;
+}
+
+.dark-theme .quantity-btn {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+.dark-theme .quantity-btn:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.dark-theme .item-details h3,
+.dark-theme .total,
+.dark-theme .total-price,
+.dark-theme .item-total strong {
+  color: var(--text-primary);
+}
+
+.dark-theme .item-price,
+.dark-theme .quantity-display {
+  color: var(--text-primary);
+}
+
+.dark-theme .item-total {
+  color: var(--text-tertiary);
+}
+
+/* Scrollbar Dark Mode */
+.dark-theme .search-results::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+}
+
+.dark-theme .search-results::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.dark-theme .drawer-body::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.dark-theme .drawer-body::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+}
+
+.dark-theme .drawer-body::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }

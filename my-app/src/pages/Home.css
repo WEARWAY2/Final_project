@@ -5,17 +5,14 @@
 
 :root {
   --font-main: "Inter", sans-serif;
-  --color-dark: #000000;
-  --color-light: #ffffff;
-  --color-gray: #666666;
-  --color-bg: #f9f9f9;
-  --color-bg-alt: #f2f0f1;
-  --border-light: #eaeaea;
 }
 
-body {
+.hero-section,
+.brands-section,
+.new-arrivals-section,
+.top-selling-section,
+.browse-section {
   font-family: var(--font-main);
-  background-color: var(--color-bg);
 }
 
 @keyframes fadeIn {
@@ -50,7 +47,7 @@ body {
 /* --- Hero Section --- */
 .hero-section {
   width: 100%;
-  background-color: var(--color-bg-alt);
+  background-color: var(--bg-secondary);
   position: relative;
   overflow: hidden;
 }
@@ -85,7 +82,7 @@ body {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: var(--color-dark);
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: -2.5px;
   animation-delay: 0.2s;
@@ -94,15 +91,15 @@ body {
 .hero-description {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--color-gray);
+  color: var(--text-tertiary);
   margin: 0;
   max-width: 500px;
   animation-delay: 0.4s;
 }
 
 .shop-now-button {
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
   border: 2px solid transparent;
   border-radius: 999px;
   padding: 1rem 3.5rem;
@@ -116,11 +113,11 @@ body {
 }
 
 .shop-now-button:hover {
-  background-color: var(--color-light);
-  color: var(--color-dark);
-  border-color: var(--color-dark);
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .hero-stats {
@@ -1030,8 +1027,6 @@ body {
   transform: translateY(20px);
 }
 
-
-
 .perk-card:hover {
   transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
   box-shadow: 0 20px 40px rgba(31, 38, 135, 0.2);
@@ -1114,4 +1109,119 @@ body {
   .perks-title {
     font-size: 2rem;
   }
+}
+
+/* ===================================
+   DARK MODE OVERRIDES
+   =================================== */
+.dark-theme .stat-number,
+.dark-theme .section-title,
+.dark-theme .link-all,
+.dark-theme .p-name,
+.dark-theme .p-price,
+.dark-theme .perk h4,
+.dark-theme .perk-card-title,
+.dark-theme .selling-card-cta,
+.dark-theme .newsletter-button,
+.dark-theme .perks-title {
+  color: var(--text-primary);
+}
+
+.dark-theme .stat-label,
+.dark-theme .p-bottom,
+.dark-theme .perk p,
+.dark-theme .perk-card-description,
+.dark-theme .perks-subtitle {
+  color: var(--text-tertiary);
+}
+
+.dark-theme .product-card-home,
+.dark-theme .perk,
+.dark-theme .perk-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+.dark-theme .perk-icon {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.dark-theme .brand-marquee {
+  background-color: var(--accent-primary);
+}
+
+.dark-theme .brand-marquee::before {
+  background: linear-gradient(to right, var(--accent-primary), transparent);
+}
+
+.dark-theme .brand-marquee::after {
+  background: linear-gradient(to left, var(--accent-primary), transparent);
+}
+
+.dark-theme .selling-card-cta {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.dark-theme .selling-card-cta:hover {
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+}
+
+.dark-theme .newsletter-button {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.dark-theme .newsletter-button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.dark-theme .perk-icon-wrapper {
+  background: var(--bg-primary);
+}
+
+.dark-theme .perk-icon-wrapper svg {
+  color: var(--accent-primary);
+}
+
+.dark-theme .perk-card:hover .perk-icon-wrapper {
+  background-color: var(--accent-primary);
+}
+
+.dark-theme .perk-card:hover .perk-icon-wrapper svg {
+  color: var(--bg-primary);
+}
+
+.dark-theme .category-label,
+.dark-theme .collection-content h3,
+.dark-theme .collection-content p,
+.dark-theme .collection-cta,
+.dark-theme .newsletter-title,
+.dark-theme .newsletter-description {
+  color: var(--text-primary);
+}
+
+.dark-theme .stat-divider {
+  background-color: var(--border-color);
+}
+
+.dark-theme .p-img {
+  background: var(--bg-tertiary);
+}
+
+.dark-theme .newsletter-input {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.dark-theme .newsletter-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.dark-theme .top-selling-section,
+.dark-theme .featured-collections {
+  background-color: var(--bg-primary);
 }

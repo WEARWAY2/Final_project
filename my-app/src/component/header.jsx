@@ -10,8 +10,11 @@ import {
   FaPlus,
   FaMinus,
   FaBars,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { useTheme } from "../context/ThemeContext";
 import { PRODUCTS } from "../config/products";
 import "./header.css";
 
@@ -28,6 +31,7 @@ const Header = () => {
     clearCart,
     removeFromWishlist,
   } = useCart();
+  const { theme, toggleTheme, isDark } = useTheme();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -346,6 +350,21 @@ const Header = () => {
 
         {/* Action Icons */}
         <div className="header-actions">
+          <button
+            className="icon-button theme-toggle"
+            aria-label="Toggle Dark Mode"
+            onClick={toggleTheme}
+          >
+            <motion.div 
+              whileHover={{ scale: 1.1, rotate: 15 }} 
+              whileTap={{ scale: 0.95 }}
+              initial={{ rotate: 0 }}
+              animate={{ rotate: isDark ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isDark ? <FaSun size={24} /> : <FaMoon size={24} />}
+            </motion.div>
+          </button>
           <button
             className="icon-button"
             aria-label="Shopping Cart"
