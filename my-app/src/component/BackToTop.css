@@ -20,7 +20,8 @@
   opacity: 0; /* Start hidden */
   transform: scale(0.9); /* Start slightly smaller */
   pointer-events: none; /* Not clickable when hidden */
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; /* Animate both properties */
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease,
+    box-shadow 0.3s ease; /* Animate both properties */
 }
 
 /* This class is added by React to make the button appear */
