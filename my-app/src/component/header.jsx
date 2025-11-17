@@ -9,8 +9,8 @@ import {
   FaTimes,
   FaPlus,
   FaMinus,
+  FaBars,
 } from "react-icons/fa";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useCart } from "../context/CartContext";
 import { PRODUCTS } from "../config/products";
 import "./header.css";
@@ -34,27 +34,46 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const navigate = useNavigate();
 
-  // Handle scroll effect for navbar
+  // Header visibility on mount
   useEffect(() => {
-    // Trigger fade-in animation on mount
-    const timer = setTimeout(() => setIsVisible(true), 100);
+    setTimeout(() => setIsHeaderVisible(true), 100);
+  }, []);
 
+  // Category data for dropdowns
+  const categoryData = {
+    men: {
+      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
+      clothing: ['T-Shirts', 'Shirts', 'Jeans', 'Jackets', 'Sweaters'],
+      footwear: ['Sneakers', 'Boots', 'Sandals', 'Formal Shoes'],
+      accessories: ['Watches', 'Bags', 'Belts', 'Sunglasses']
+    },
+    women: {
+      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
+      clothing: ['Dresses', 'Tops', 'Jeans', 'Jackets', 'Skirts'],
+      footwear: ['Heels', 'Sneakers', 'Boots', 'Sandals'],
+      accessories: ['Handbags', 'Jewelry', 'Scarves', 'Sunglasses']
+    },
+    kids: {
+      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
+      clothing: ['T-Shirts', 'Pants', 'Dresses', 'Jackets'],
+      footwear: ['Sneakers', 'Sandals', 'Boots'],
+      accessories: ['Bags', 'Hats', 'Socks']
+    }
+  };
+
+  // Scroll detection for navbar shrink effect
+  useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Live search handler
@@ -115,9 +134,9 @@ const Header = () => {
     removeFromWishlist(item.id);
   };
 
-  // Prevent body scroll when drawer is open
+  // Prevent body scroll when drawer or mobile menu is open
   useEffect(() => {
-    if (isCartOpen || isWishlistOpen) {
+    if (isCartOpen || isWishlistOpen || isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -125,7 +144,7 @@ const Header = () => {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isCartOpen, isWishlistOpen]);
+  }, [isCartOpen, isWishlistOpen, isMobileMenuOpen]);
 
   const getTotalPrice = () => {
     return cartItems.reduce(
@@ -135,24 +154,202 @@ const Header = () => {
   };
 
   return (
-    <header className={`header ${isScrolled ? "header-scrolled" : ""} ${isVisible ? "header-visible" : ""}`}>
+    <header
+      className={`header ${isHeaderVisible ? "header-visible" : ""} ${
+        isScrolled ? "header-scrolled" : ""
+      }`}
+    >
       <div className="header-container">
         {/* Logo */}
         <div className="logo">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
             <h1>WearWay</h1>
           </Link>
         </div>
 
-        {/* Navigation */}
-        <nav className="nav-menu">
+        {/* Desktop Navigation */}
+        <nav className="nav-menu desktop-nav">
           <Link to="/" className="nav-item">
             Home
           </Link>
-          <Link to="/shop" className="nav-item">
-            Shop
-          </Link>
+          <div 
+            className="nav-item-wrapper"
+            onMouseEnter={() => setActiveDropdown('men')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <Link to="/shop/men" className="nav-item">
+              Men
+            </Link>
+            {activeDropdown === 'men' && (
+              <div className="dropdown-menu">
+                <div className="dropdown-content">
+                  <div className="dropdown-column">
+                    <h4>Featured</h4>
+                    <ul>
+                      {categoryData.men.featured.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Clothing</h4>
+                    <ul>
+                      {categoryData.men.clothing.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Footwear</h4>
+                    <ul>
+                      {categoryData.men.footwear.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Accessories</h4>
+                    <ul>
+                      {categoryData.men.accessories.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div 
+            className="nav-item-wrapper"
+            onMouseEnter={() => setActiveDropdown('women')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <Link to="/shop/women" className="nav-item">
+              Women
+            </Link>
+            {activeDropdown === 'women' && (
+              <div className="dropdown-menu">
+                <div className="dropdown-content">
+                  <div className="dropdown-column">
+                    <h4>Featured</h4>
+                    <ul>
+                      {categoryData.women.featured.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Clothing</h4>
+                    <ul>
+                      {categoryData.women.clothing.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Footwear</h4>
+                    <ul>
+                      {categoryData.women.footwear.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Accessories</h4>
+                    <ul>
+                      {categoryData.women.accessories.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div 
+            className="nav-item-wrapper"
+            onMouseEnter={() => setActiveDropdown('kids')}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <Link to="/shop/kids" className="nav-item">
+              Kids
+            </Link>
+            {activeDropdown === 'kids' && (
+              <div className="dropdown-menu">
+                <div className="dropdown-content">
+                  <div className="dropdown-column">
+                    <h4>Featured</h4>
+                    <ul>
+                      {categoryData.kids.featured.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Clothing</h4>
+                    <ul>
+                      {categoryData.kids.clothing.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Footwear</h4>
+                    <ul>
+                      {categoryData.kids.footwear.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="dropdown-column">
+                    <h4>Accessories</h4>
+                    <ul>
+                      {categoryData.kids.accessories.map(item => (
+                        <li key={item}>
+                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
+
+        {/* Mobile Hamburger Menu */}
+        <button
+          className={`mobile-menu-toggle ${isMobileMenuOpen ? "active" : ""}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
 
         {/* Search Bar */}
         <div className="search-bar">
@@ -256,6 +453,55 @@ const Header = () => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      <div className={`mobile-menu ${isMobileMenuOpen ? "open" : ""}`}>
+        <nav className="mobile-nav-list">
+          <Link
+            to="/"
+            className="mobile-nav-item"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/shop"
+            className="mobile-nav-item"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Shop
+          </Link>
+          <Link
+            to="/shop/men"
+            className="mobile-nav-item"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Men
+          </Link>
+          <Link
+            to="/shop/women"
+            className="mobile-nav-item"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Women
+          </Link>
+          <Link
+            to="/shop/kids"
+            className="mobile-nav-item"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Kids
+          </Link>
+        </nav>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="mobile-menu-overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
+      )}
 
       {/* Cart Drawer */}
       <div className={`drawer cart-drawer ${isCartOpen ? "open" : ""}`}>
