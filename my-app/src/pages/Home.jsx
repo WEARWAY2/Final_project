@@ -363,9 +363,7 @@ const Home = () => {
             <h2 id="top-selling-title" className="section-title">
               Our Top Selling Products
             </h2>
-            <Link className="link-all" to="/shop">
-              View All
-            </Link>
+          
           </div>
           <div className="top-selling-grid">
             {topSellingProducts.map((product, index) => {

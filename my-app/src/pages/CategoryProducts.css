@@ -1074,3 +1074,310 @@
     font-size: 1.1rem;
   }
 }
+
+/* Extra Small Phones - Below 450px */
+@media (max-width: 450px) {
+  .category-products-page {
+    padding: 0.75rem;
+  }
+
+  .products-grid {
+    gap: 0.875rem;
+  }
+
+  /* Compact header for small screens */
+  .products-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+  }
+
+  .products-sort {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .products-sort > span {
+    font-size: 0.8rem;
+  }
+
+  .per-page-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .per-page-btn {
+    flex: 1;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .sort-select {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  /* Compact product cards */
+  .product-card {
+    border-radius: 16px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-image {
+    height: 240px;
+    border-radius: 16px;
+  }
+
+  /* Smaller slider controls */
+  .slider-arrow {
+    width: 26px;
+    height: 26px;
+  }
+
+  .slider-arrow-prev {
+    left: 6px;
+  }
+
+  .slider-arrow-next {
+    right: 6px;
+  }
+
+  .slider-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Compact indicators */
+  .image-indicators {
+    bottom: 8px;
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .indicator-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicator-dot.active {
+    width: 18px;
+  }
+
+  /* Smaller badges */
+  .discount-badge-overlay {
+    top: 8px;
+    left: 8px;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  /* Compact action buttons */
+  .product-actions {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+
+  .action-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Compact product info */
+  .product-info {
+    padding: 0.875rem 0.75rem;
+  }
+
+  .product-name {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-rating {
+    gap: 0.375rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .star {
+    font-size: 0.95rem;
+  }
+
+  .rating-value {
+    font-size: 0.75rem;
+  }
+
+  .product-price {
+    gap: 0.5rem;
+  }
+
+  .current-price {
+    font-size: 1.25rem;
+  }
+
+  .original-price {
+    font-size: 1rem;
+  }
+
+  .discount-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  /* Compact filters sidebar */
+  .filters-sidebar {
+    width: 280px;
+    padding: 0.875rem;
+  }
+
+  .filters-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .filter-section {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .filter-section h4,
+  .filter-item {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .color-options {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.375rem;
+  }
+
+  .color-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .check-mark {
+    font-size: 1rem;
+  }
+
+  .size-options {
+    gap: 0.375rem;
+  }
+
+  .size-btn {
+    padding: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .style-btn {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .apply-filter-btn,
+  .reset-filter-btn {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  /* Compact mobile filter toggle */
+  .mobile-filter-toggle {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .mobile-filter-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Compact pagination */
+  .pagination {
+    margin-top: 2rem;
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.8rem;
+  }
+
+  .pagination-dots {
+    padding: 0 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  /* Notification adjustments */
+  .notification {
+    top: 80px;
+    right: 1rem;
+    left: 1rem;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  /* No products section */
+  .no-products {
+    padding: 3rem 1rem;
+  }
+
+  .no-products p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Ultra Small Phones - Below 375px */
+@media (max-width: 375px) {
+  .category-products-page {
+    padding: 0.5rem;
+  }
+
+  .products-grid {
+    gap: 0.75rem;
+  }
+
+  .category-title {
+    font-size: 1.35rem;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-info {
+    padding: 0.75rem 0.625rem;
+  }
+
+  .product-name {
+    font-size: 0.9rem;
+  }
+
+  .star {
+    font-size: 0.85rem;
+  }
+
+  .current-price {
+    font-size: 1.15rem;
+  }
+
+  .original-price {
+    font-size: 0.9rem;
+  }
+
+  .filters-sidebar {
+    width: 260px;
+  }
+}

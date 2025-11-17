@@ -78,6 +78,7 @@ body {
 .hero-stats {
   opacity: 0;
   animation: fadeIn 0.8s ease-out forwards;
+  text-decoration: none;
 }
 
 .hero-title {
