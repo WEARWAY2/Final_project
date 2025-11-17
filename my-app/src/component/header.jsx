@@ -465,13 +465,6 @@ const Header = () => {
             Home
           </Link>
           <Link
-            to="/shop"
-            className="mobile-nav-item"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Shop
-          </Link>
-          <Link
             to="/shop/men"
             className="mobile-nav-item"
             onClick={() => setIsMobileMenuOpen(false)}

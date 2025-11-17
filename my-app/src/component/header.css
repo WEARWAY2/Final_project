@@ -226,28 +226,29 @@ body {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   position: relative;
-  padding-left: 12px;
+  padding-left: 0;
 }
 
 .dropdown-column li a::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: -12px;
   top: 50%;
-  transform: translateY(-50%);
-  width: 0;
+  transform: translateY(-50%) scale(0);
+  width: 6px;
   height: 2px;
   background: #000;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .dropdown-column li a:hover {
   color: #000;
-  padding-left: 12px;
+  transform: scale(1.05);
 }
 
 .dropdown-column li a:hover::before {
-  width: 6px;
+  transform: translateY(-50%) scale(1);
 }
 
 /* Mobile Menu Toggle Button */
