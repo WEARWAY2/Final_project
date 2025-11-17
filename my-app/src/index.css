@@ -1,5 +1,6 @@
 :root {
-  --base-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --base-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
   font-family: var(--base-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,8 +10,15 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
-  height: 100%;
+html,
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#root {
+  min-height: 100vh;
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -21,7 +29,10 @@ body {
   color: #111827;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   margin: 0 0 0.5rem 0;
 }
 

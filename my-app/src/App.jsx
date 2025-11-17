@@ -9,6 +9,8 @@ import CategoryProducts from "./pages/CategoryProducts";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
+import BackToTop from './component/BackToTop';
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           </Routes>
           <Footer />
         </div>
+        <BackToTop />
       </Router>
     </CartProvider>
   );
