@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import BackToTop from './component/BackToTop';
+import ScrollToTop from './component/ScrollToTop';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <ThemeProvider>
       <CartProvider>
         <Router>
+          <ScrollToTop />
           <div className="app">
             <Header />
             <Routes>

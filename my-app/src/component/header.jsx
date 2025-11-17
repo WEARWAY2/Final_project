@@ -186,7 +186,7 @@ const Header = () => {
                     <ul>
                       {categoryData.men.featured.map(item => (
                         <li key={item}>
-                          <Link to="/shop/men" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/men?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>
@@ -221,7 +221,7 @@ const Header = () => {
                     <ul>
                       {categoryData.women.featured.map(item => (
                         <li key={item}>
-                          <Link to="/shop/women" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/women?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>
@@ -256,7 +256,7 @@ const Header = () => {
                     <ul>
                       {categoryData.kids.featured.map(item => (
                         <li key={item}>
-                          <Link to="/shop/kids" onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link to={`/shop/kids?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
                         </li>
                       ))}
                     </ul>

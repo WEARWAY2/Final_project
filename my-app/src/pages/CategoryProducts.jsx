@@ -17,6 +17,7 @@ const CategoryProducts = () => {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedStyles, setSelectedStyles] = useState([]);
+  const [selectedFeature, setSelectedFeature] = useState(null); // "new-arrivals", "best-sellers", "sale"
   const [sortBy, setSortBy] = useState("Most Popular");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -98,11 +99,29 @@ const CategoryProducts = () => {
     if (categoryParam) {
       setSelectedCategories([categoryParam]);
     }
+    
+    // Handle feature parameter (New Arrivals, Best Sellers, Sale)
+    const featureParam = searchParams.get('feature');
+    if (featureParam) {
+      setSelectedFeature(featureParam);
+    }
   }, [searchParams]);
 
   // Filter products
   useEffect(() => {
     let filtered = [...allProducts];
+
+    // Filter by feature (New Arrivals, Best Sellers, Sale)
+    if (selectedFeature === "new-arrivals") {
+      // Get the newest products (assuming higher IDs are newer)
+      filtered = filtered.sort((a, b) => b.id - a.id).slice(0, Math.ceil(allProducts.length / 2));
+    } else if (selectedFeature === "best-sellers") {
+      // Get products with rating >= 4.5
+      filtered = filtered.filter((product) => product.rating >= 4.5);
+    } else if (selectedFeature === "sale") {
+      // Get products with discount
+      filtered = filtered.filter((product) => product.discount);
+    }
 
     // Filter by price
     filtered = filtered.filter(
@@ -163,6 +182,7 @@ const CategoryProducts = () => {
     selectedSizes,
     selectedCategories,
     selectedStyles,
+    selectedFeature,
     sortBy,
     allProducts,
   ]);
@@ -220,6 +240,7 @@ const CategoryProducts = () => {
     setSelectedSizes([]);
     setSelectedCategories([]);
     setSelectedStyles([]);
+    setSelectedFeature(null);
     setSortBy("Most Popular");
   };
 
@@ -399,47 +420,71 @@ const CategoryProducts = () => {
         {/* Products Grid */}
         <main className="products-main">
           <div className="products-header">
-            <h2 className="category-title">
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </h2>
-            <div className="products-sort">
-              <span>
-                Showing {startIndex + 1}-
-                {Math.min(endIndex, filteredProducts.length)} of{" "}
-                {filteredProducts.length} Products
-              </span>
-              <div
-                className="per-page-toggle"
-                role="group"
-                aria-label="Items per page"
-              >
-                <button
-                  className={`per-page-btn ${
-                    itemsPerPage === 6 ? "active" : ""
-                  }`}
-                  onClick={() => setItemsPerPage(6)}
+            <div className="header-row">
+              <h2 className="category-title">
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </h2>
+              <div className="products-sort">
+                <span>
+                  Showing {startIndex + 1}-
+                  {Math.min(endIndex, filteredProducts.length)} of{" "}
+                  {filteredProducts.length} Products
+                </span>
+                <div
+                  className="per-page-toggle"
+                  role="group"
+                  aria-label="Items per page"
                 >
-                  6 / page
-                </button>
-                <button
-                  className={`per-page-btn ${
-                    itemsPerPage === 12 ? "active" : ""
-                  }`}
-                  onClick={() => setItemsPerPage(12)}
+                  <button
+                    className={`per-page-btn ${
+                      itemsPerPage === 6 ? "active" : ""
+                    }`}
+                    onClick={() => setItemsPerPage(6)}
+                  >
+                    6 / page
+                  </button>
+                  <button
+                    className={`per-page-btn ${
+                      itemsPerPage === 12 ? "active" : ""
+                    }`}
+                    onClick={() => setItemsPerPage(12)}
+                  >
+                    12 / page
+                  </button>
+                </div>
+                <select
+                  className="sort-select"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
                 >
-                  12 / page
-                </button>
+                  <option>Most Popular</option>
+                  <option>Newest</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                </select>
               </div>
-              <select
-                className="sort-select"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+            </div>
+            
+            {/* Feature Filter Buttons */}
+            <div className="feature-filters">
+              <button
+                className={`feature-btn ${selectedFeature === "new-arrivals" ? "active" : ""}`}
+                onClick={() => setSelectedFeature(selectedFeature === "new-arrivals" ? null : "new-arrivals")}
               >
-                <option>Most Popular</option>
-                <option>Newest</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-              </select>
+                New Arrivals
+              </button>
+              <button
+                className={`feature-btn ${selectedFeature === "best-sellers" ? "active" : ""}`}
+                onClick={() => setSelectedFeature(selectedFeature === "best-sellers" ? null : "best-sellers")}
+              >
+                Best Sellers
+              </button>
+              <button
+                className={`feature-btn ${selectedFeature === "sale" ? "active" : ""}`}
+                onClick={() => setSelectedFeature(selectedFeature === "sale" ? null : "sale")}
+              >
+                Sale
+              </button>
             </div>
           </div>
 

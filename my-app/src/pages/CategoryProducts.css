@@ -403,9 +403,15 @@
 
 .products-header {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.header-row {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -415,6 +421,40 @@
   font-weight: 800;
   margin: 0;
   text-transform: capitalize;
+}
+
+/* Feature Filter Buttons */
+.feature-filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.feature-btn {
+  padding: 0.65rem 1.5rem;
+  background: #fff;
+  color: #000;
+  border: 2px solid #e5e5e5;
+  border-radius: 62px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.feature-btn:hover {
+  background: #f0f0f0;
+  border-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-btn.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .products-sort {
