@@ -5,17 +5,15 @@
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 2rem;
-  background-color: var(--bg-secondary);
-  font-family: sans-serif;
-  transition: background-color 0.3s ease;
+  background-color: #f9f9f9; /* Added a light background color for the page */
+  font-family: sans-serif; /* Using a common sans-serif font */
 }
 
 /* Page Header */
 .checkout-header h1 {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin: 0 0 2rem 0;
-  color: var(--text-primary);
+  font-size: 2.5rem; /* Increased font size */
+  font-weight: 900; /* Bolder font weight */
+  margin: 0 0 2rem 0; /* Adjusted margin */
 }
 
 /* Main Grid Layout */
@@ -35,15 +33,14 @@
 /* Individual Cart Item Row */
 .ci-row {
   display: grid;
-  grid-template-columns: 100px 1fr auto;
+  grid-template-columns: 100px 1fr auto; /* Adjusted for image size */
   align-items: center;
   gap: 1.5rem;
-  background: var(--bg-primary);
-  border: none;
-  border-radius: 16px;
+  background: #fff;
+  border: none; /* Removed border */
+  border-radius: 16px; /* Increased border-radius for a softer look */
   padding: 1.25rem;
-  box-shadow: 0 4px 12px var(--shadow-sm);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Added a subtle shadow */
 }
 
 .ci-thumb {
@@ -59,22 +56,20 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-primary);
 }
 
 .ci-attrs {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stacked attributes vertically */
   gap: 0.25rem;
-  color: var(--text-tertiary);
+  color: #666;
   font-size: 0.9rem;
 }
 
 .ci-price {
   margin-top: 0.75rem;
   font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--text-primary);
+  font-size: 1.2rem; /* Made price more prominent */
 }
 
 /* Item Actions (Quantity and Remove) */
@@ -91,11 +86,10 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border: none;
+  border: none; /* Removed border */
   border-radius: 999px;
   padding: 0.5rem;
-  background-color: var(--bg-tertiary);
-  transition: background-color 0.3s ease;
+  background-color: #f5f5f5; /* Light grey background for the whole component */
 }
 
 .qty button {
@@ -103,12 +97,11 @@
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: var(--bg-primary);
+  background: #fff; /* White background for buttons */
   cursor: pointer;
   font-size: 1.2rem;
-  color: var(--text-secondary);
-  box-shadow: 0 2px 4px var(--shadow-sm);
-  transition: all 0.3s ease;
+  color: #888;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow on buttons */
 }
 
 .qty-val {
@@ -116,7 +109,6 @@
   text-align: center;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--text-primary);
 }
 
 .ci-remove {
@@ -132,20 +124,18 @@
 
 /* Order Summary Section */
 .order-summary {
-  background: var(--bg-primary);
-  border: none;
-  border-radius: 20px;
+  background: #fff;
+  border: none; /* Removed border */
+  border-radius: 20px; /* Increased border-radius */
   padding: 1.75rem;
   height: fit-content;
-  box-shadow: 0 4px 12px var(--shadow-sm);
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
 }
 
 .order-summary h2 {
   margin: 0 0 1.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
 }
 
 .os-row,
@@ -155,15 +145,15 @@
   justify-content: space-between;
   padding: 0.85rem 0;
   font-size: 1rem;
-  color: var(--text-tertiary);
+  color: #555;
 }
 
 .os-total {
-  border-top: 1px solid var(--border-secondary);
+  border-top: 1px solid #f0f0f0;
   margin-top: 1rem;
   font-weight: 800;
   font-size: 1.1rem;
-  color: var(--text-primary);
+  color: #000;
 }
 
 .os-row .neg {
@@ -181,36 +171,34 @@
   flex: 1;
   border-radius: 999px;
   border: none;
-  background-color: var(--bg-tertiary);
+  background-color: #f5f5f5; /* Light grey background for input */
   padding: 0.75rem 1.25rem;
   outline: none;
   font-size: 0.9rem;
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
 }
 
 /* Buttons */
 .btn-ghost {
+  /* This is the "Apply" button */
   border-radius: 999px;
   border: none;
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: #000;
+  color: #fff;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
 }
 
 .btn-primary {
+  /* This is the "Go to Checkout" button */
   border-radius: 999px;
   border: none;
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: #000;
+  color: #fff;
   padding: 1rem 1.5rem;
   font-weight: 700;
   cursor: pointer;
   font-size: 1rem;
-  transition: all 0.3s ease;
 }
 
 .block {
