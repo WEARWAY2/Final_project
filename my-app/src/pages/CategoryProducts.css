@@ -456,6 +456,12 @@
   border-color: #000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+.dark-theme .feature-btn.active{
+    background: #000000;
+  color: #ffeaea;
+  border-color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+}
 
 .products-sort {
   display: flex;

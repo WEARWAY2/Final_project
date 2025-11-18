@@ -279,7 +279,7 @@ const Home = () => {
                   ease: "easeInOut",
                 }}
               >
-                <IoSparkles size={56} color="#000" />
+                <IoSparkles size={56}  />
               </motion.div>
             </div>
             <div className="star-decoration star-small">
@@ -295,7 +295,7 @@ const Home = () => {
                   delay: 0.5,
                 }}
               >
-                <IoSparkles size={40} color="#000" />
+                <IoSparkles size={40} />
               </motion.div>
             </div>
             <img

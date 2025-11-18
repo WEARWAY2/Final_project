@@ -36,7 +36,9 @@
   margin: 0;
   line-height: 1.2;
 }
-
+.dark-theme .newsletter-title{
+  color: black !important;
+}
 .newsletter-form {
   display: flex;
   gap: 1rem;
