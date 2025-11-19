@@ -666,26 +666,26 @@ body {
 }
 
 .icon-button {
-  background: #f5f5f5;
-  border: 2px solid transparent;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
   cursor: pointer;
   padding: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #555;
+  color: var(--text-secondary);
   position: relative;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .icon-button:hover {
   transform: translateY(-4px) scale(1.05);
-  background: #000;
-  color: #fff;
-  border-color: #000;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg);
 }
 
 .icon-button svg {
@@ -802,10 +802,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-primary);
 }
 
 .close-btn:hover {
-  background: #f0f0f0;
+  background: var(--bg-hover);
 }
 
 .drawer-body {
@@ -826,19 +827,19 @@ body {
 }
 
 .empty-state svg {
-  color: #ccc;
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
 .empty-state p {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--text-tertiary);
   margin-bottom: 1.5rem;
 }
 
 .continue-shopping-btn {
-  background: #000;
-  color: #fff;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   border: none;
   padding: 0.75rem 2rem;
   border-radius: 62px;
@@ -849,9 +850,9 @@ body {
 }
 
 .continue-shopping-btn:hover {
-  background: #333;
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 /* Items List */
@@ -865,10 +866,11 @@ body {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  background: #f9f9f9;
+  background: var(--bg-card);
   border-radius: 12px;
   transition: all 0.3s;
   animation: slideInRight 0.3s ease-out;
+  border: 1px solid var(--border-light);
 }
 
 @keyframes slideInRight {
@@ -884,7 +886,7 @@ body {
 }
 
 .drawer-item:hover {
-  background: #f0f0f0;
+  background: var(--bg-tertiary);
   transform: translateX(-4px);
 }
 
@@ -894,6 +896,12 @@ body {
   flex-shrink: 0;
   border-radius: 8px;
   overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-image:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
 .item-image img {
@@ -901,7 +909,7 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  background: #f0f0f0;
+  background: var(--bg-tertiary);
 }
 
 .item-details {
@@ -918,11 +926,18 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.item-details h3:hover {
+  color: var(--accent-primary);
+  text-decoration: underline;
 }
 
 .item-quantity {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-tertiary);
   margin: 0;
 }
 
@@ -935,19 +950,20 @@ body {
 .item-price {
   font-size: 1rem;
   font-weight: 700;
-  color: #000;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .item-original-price {
   font-size: 0.9rem;
-  color: #999;
+  color: var(--text-muted);
   text-decoration: line-through;
   margin: 0;
 }
 
 .item-total {
   font-size: 0.95rem;
+  color: var(--text-tertiary);
   color: #666;
   margin: 0.5rem 0 0 0;
 }
@@ -966,8 +982,8 @@ body {
 }
 
 .quantity-btn {
-  background: #f0f0f0;
-  border: 1px solid #e5e5e5;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   width: 32px;
   height: 32px;
   border-radius: 8px;
@@ -976,15 +992,16 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
+  color: var(--text-primary);
 }
 
 .quantity-btn:hover {
-  background: #000;
-  border-color: #000;
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 .quantity-btn:hover svg {
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .quantity-btn:active {
@@ -996,7 +1013,7 @@ body {
   font-weight: 600;
   min-width: 40px;
   text-align: center;
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* Cart Item specific styling */
@@ -1016,8 +1033,8 @@ body {
 
 /* Add to Cart Button in Wishlist */
 .add-to-cart-btn {
-  background: #000;
-  color: #fff;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -1033,9 +1050,9 @@ body {
 }
 
 .add-to-cart-btn:hover {
-  background: #333;
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .add-to-cart-btn svg {
@@ -1081,14 +1098,15 @@ body {
   align-items: center;
   justify-content: center;
   height: fit-content;
+  color: var(--text-secondary);
 }
 
 .remove-btn:hover {
-  background: #ff0000;
+  background: #ef4444;
 }
 
 .remove-btn:hover svg {
-  color: #fff;
+  color: #ffffff;
 }
 
 /* Drawer Footer */
@@ -1101,8 +1119,8 @@ body {
 .clear-cart-btn {
   width: 100%;
   background: transparent;
-  color: #ff0000;
-  border: 2px solid #ff0000;
+  color: #ef4444;
+  border: 2px solid #ef4444;
   padding: 0.75rem;
   border-radius: 62px;
   font-size: 0.9rem;
@@ -1113,10 +1131,10 @@ body {
 }
 
 .clear-cart-btn:hover {
-  background: #ff0000;
-  color: #fff;
+  background: #ef4444;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .total {
@@ -1126,18 +1144,19 @@ body {
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .total-price {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .checkout-btn {
   width: 100%;
-  background: #000;
-  color: #fff;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   border: none;
   padding: 1rem;
   border-radius: 62px;
@@ -1148,9 +1167,9 @@ body {
 }
 
 .checkout-btn:hover {
-  background: #333;
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 /* Scrollbar Styling */
@@ -1427,18 +1446,7 @@ body {
   color: var(--text-muted);
 }
 
-/* Icon Buttons Dark Mode */
-.dark-theme .icon-button {
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
-  border-color: var(--border-color);
-}
-
-.dark-theme .icon-button:hover {
-  background: var(--accent-primary);
-  color: #ffffff;
-  border-color: var(--accent-primary);
-}
+/* Icon Buttons Dark Mode - Now handled by CSS variables */
 
 /* Theme Toggle Button Specific Styling */
 .theme-toggle {
@@ -1447,11 +1455,11 @@ body {
 }
 
 .theme-toggle svg {
-  color: #000000;
+  color: var(--text-secondary);
 }
 
-.dark-theme .theme-toggle svg {
-  color: #ffffff;
+.theme-toggle:hover svg {
+  color: var(--bg-primary);
 }
 
 /* Mobile Menu Dark Mode */

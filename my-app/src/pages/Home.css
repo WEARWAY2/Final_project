@@ -82,7 +82,7 @@
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
-  color: #000000;
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: -2.5px;
   animation-delay: 0.2s;
@@ -149,7 +149,7 @@
 .stat-divider {
   width: 1px;
   height: 60px;
-  background-color: #d1d1d1;
+  background-color: var(--border-color);
 }
 
 .hero-image {
@@ -337,7 +337,7 @@
   gap: 1.5rem;
 }
 .product-card-home {
-  background: var(--color-light);
+  background: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
@@ -350,7 +350,7 @@
 }
 .p-img {
   aspect-ratio: 3/4;
-  background: #f5f5f5;
+  background: var(--bg-tertiary);
   overflow: hidden;
 }
 .p-img img {
@@ -387,7 +387,7 @@
 
 /* --- Top Selling Section (NEW) --- */
 .top-selling-section {
-  background-color: var(--color-light);
+  background-color: var(--bg-secondary);
 }
 
 .top-selling-grid {
@@ -556,7 +556,7 @@
 
 /* --- Featured Collections Section --- */
 .featured-collections {
-  background-color: var(--color-bg);
+  background-color: var(--bg-primary);
 }
 
 .collections-grid {
@@ -595,8 +595,8 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.7)
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.75)
   );
   transition: background 0.4s ease;
 }
@@ -604,8 +604,8 @@
 .collection-tile:hover .collection-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.85)
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.9)
   );
 }
 
@@ -619,12 +619,14 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.75rem;
   font-weight: 800;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .collection-content p {
   margin: 0 0 1rem 0;
   font-size: 1rem;
+  color: #f0f0f0;
   opacity: 0.95;
   line-height: 1.4;
 }
@@ -634,12 +636,15 @@
   font-weight: 600;
   font-size: 0.95rem;
   padding: 0.5rem 0;
-  border-bottom: 2px solid var(--color-light);
-  transition: padding-left 0.3s ease;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transition: padding-left 0.3s ease, border-color 0.3s ease;
 }
 
 .collection-tile:hover .collection-cta {
   padding-left: 0.5rem;
+  color: #ffd700;
+  border-color: #ffd700;
 }
 
 /* --- Newsletter Band --- */
@@ -957,7 +962,7 @@
 
 /* --- Enhanced Perks Section --- */
 .perks-section {
-  background-color: var(--color-bg-alt); /* align with theme variables */
+  background-color: var(--bg-secondary);
   padding: 6rem 0;
   position: relative;
   overflow: hidden;
@@ -971,7 +976,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+  background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: 0.3;
 }
@@ -1011,19 +1016,14 @@
   text-align: center;
   padding: 2.5rem 2rem;
   border-radius: 24px;
-  background: rgba(
-    255,
-    255,
-    255,
-    0.6
-  ); /* Semi-transparent background for glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px); /* The key to the glassmorphism effect */
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
   transition: opacity 0.6s ease, transform 0.6s ease,
     box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  overflow: hidden; /* To contain the animated border */
-  opacity: 0; /* for staggered reveal */
+  overflow: hidden;
+  opacity: 0;
   transform: translateY(20px);
 }
 
@@ -1061,27 +1061,27 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: var(--color-light);
+  background: var(--bg-tertiary);
   display: grid;
   place-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .perk-icon-wrapper svg {
   width: 32px;
   height: 32px;
-  color: var(--color-dark);
+  color: var(--text-primary);
   transition: color 0.3s ease;
 }
 
 .perk-card:hover .perk-icon-wrapper {
   transform: scale(1.1);
-  background-color: var(--color-dark);
+  background-color: var(--accent-primary);
 }
 
 .perk-card:hover .perk-icon-wrapper svg {
-  color: var(--color-light);
+  color: var(--bg-primary);
 }
 
 .perk-card-title {
@@ -1114,49 +1114,18 @@
 /* ===================================
    DARK MODE OVERRIDES
    =================================== */
-.dark-theme .stat-number,
-.dark-theme .section-title,
-.dark-theme .link-all,
-.dark-theme .p-name,
-.dark-theme .p-price,
-.dark-theme .perk h4,
-.dark-theme .perk-card-title,
-.dark-theme .selling-card-cta,
-.dark-theme .newsletter-button,
-.dark-theme .perks-title {
-  color: var(--text-primary);
-}
-
-.dark-theme .stat-label,
-.dark-theme .p-bottom,
-.dark-theme .perk p,
-.dark-theme .perk-card-description,
-.dark-theme .perks-subtitle {
-  color: var(--text-tertiary);
-}
-
-.dark-theme .product-card-home,
-.dark-theme .perk,
-.dark-theme .perk-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-
-.dark-theme .perk-icon {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-}
+/* Most colors are now handled by CSS variables, minimal overrides needed */
 
 .dark-theme .brand-marquee {
-  background-color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
 }
 
 .dark-theme .brand-marquee::before {
-  background: linear-gradient(to right, var(--accent-primary), transparent);
+  background: linear-gradient(to right, var(--bg-tertiary), transparent);
 }
 
 .dark-theme .brand-marquee::after {
-  background: linear-gradient(to left, var(--accent-primary), transparent);
+  background: linear-gradient(to left, var(--bg-tertiary), transparent);
 }
 
 .dark-theme .selling-card-cta {
@@ -1165,63 +1134,12 @@
 }
 
 .dark-theme .selling-card-cta:hover {
-  background: var(--bg-primary);
-  color: var(--accent-primary);
-}
-
-.dark-theme .newsletter-button {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
-}
-
-.dark-theme .newsletter-button:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-
-.dark-theme .perk-icon-wrapper {
-  background: var(--bg-primary);
-}
-
-.dark-theme .perk-icon-wrapper svg {
-  color: var(--accent-primary);
-}
-
-.dark-theme .perk-card:hover .perk-icon-wrapper {
-  background-color: var(--accent-primary);
-}
-
-.dark-theme .perk-card:hover .perk-icon-wrapper svg {
-  color: var(--bg-primary);
-}
-
-.dark-theme .category-label,
-.dark-theme .collection-content h3,
-.dark-theme .collection-content p,
-.dark-theme .collection-cta,
-.dark-theme .newsletter-title,
-.dark-theme .newsletter-description {
+  background: var(--bg-card);
   color: var(--text-primary);
+  border: 2px solid var(--accent-primary);
 }
 
-.dark-theme .stat-divider {
-  background-color: var(--border-color);
-}
-
-.dark-theme .p-img {
-  background: var(--bg-tertiary);
-}
-
-.dark-theme .newsletter-input {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  border-color: var(--border-color);
-}
-
-.dark-theme .newsletter-input:focus {
-  border-color: var(--accent-primary);
-}
-
-.dark-theme .top-selling-section,
-.dark-theme .featured-collections {
-  background-color: var(--bg-primary);
+/* Collection tiles use fixed white text over dark overlays - no dark mode override needed */
+.dark-theme .collection-tile {
+  border: 1px solid var(--border-color);
 }

@@ -112,13 +112,13 @@
 .footer-logo {
   font-size: 2rem;
   font-weight: 800;
-  color: #000;
+  color: var(--text-primary);
   margin: 0 0 1.5rem 0;
   letter-spacing: -0.5px;
 }
 
 .company-description {
-  color: #666;
+  color: var(--text-tertiary);
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
   font-size: 0.95rem;
@@ -132,20 +132,20 @@
 .social-icon {
   width: 40px;
   height: 40px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
+  color: var(--text-primary);
   transition: all 0.3s ease;
-  background-color: #fff;
+  background-color: var(--bg-card);
 }
 
 .social-icon:hover {
-  background-color: #000;
-  color: #fff;
-  border-color: #000;
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
   transform: translateY(-3px);
 }
 
@@ -163,7 +163,7 @@
 .footer-heading {
   font-size: 1rem;
   font-weight: 600;
-  color: #000;
+  color: var(--text-primary);
   margin: 0 0 1.5rem 0;
   letter-spacing: 2px;
 }
@@ -178,19 +178,19 @@
 }
 
 .footer-links a {
-  color: #666;
+  color: var(--text-tertiary);
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* Footer Bottom */
 .footer-bottom {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--border-color);
   padding: 1.5rem 0;
   display: flex;
   align-items: center;
@@ -199,7 +199,7 @@
 }
 
 .copyright {
-  color: #666;
+  color: var(--text-tertiary);
   margin: 0;
   font-size: 0.9rem;
 }
@@ -214,9 +214,9 @@
   height: 30px;
   width: auto;
   object-fit: contain;
-  background: #fff;
+  background: var(--bg-card);
   padding: 0.25rem 0.5rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
 }
 
@@ -329,38 +329,8 @@
 /* ===================================
    DARK MODE OVERRIDES
    =================================== */
-.dark-theme .footer-logo,
-.dark-theme .footer-heading,
-.dark-theme .social-icon {
-  color: var(--text-primary);
-}
+/* Most colors now handled by CSS variables - minimal overrides needed */
 
-.dark-theme .company-description,
-.dark-theme .footer-links a,
-.dark-theme .copyright {
-  color: var(--text-tertiary);
-}
-
-.dark-theme .footer-links a:hover {
-  color: var(--text-primary);
-}
-
-.dark-theme .social-icon {
-  background-color: var(--bg-card);
-  border-color: var(--border-color);
-}
-
-.dark-theme .social-icon:hover {
-  background-color: var(--accent-primary);
-  color: var(--bg-primary);
-  border-color: var(--accent-primary);
-}
-
-.dark-theme .footer-bottom {
-  border-top-color: var(--border-color);
-}
-
-.dark-theme .payment-icon {
-  background: var(--bg-card);
-  border-color: var(--border-color);
+.dark-theme .newsletter-title {
+  color: var(--bg-primary) !important;
 }

@@ -42,13 +42,13 @@ const CategoryProducts = () => {
   };
 
   const handleAddToCart = (product) => {
-    addToCart(product);
+    addToCart({ ...product, category });
     setNotification(`${product.name} added to cart!`);
     setTimeout(() => setNotification(null), 3000);
   };
 
   const handleAddToWishlist = (product) => {
-    addToWishlist(product);
+    addToWishlist({ ...product, category });
     const isInList = isInWishlist(product.id);
     setNotification(
       isInList

@@ -213,6 +213,10 @@
   background: #000;
 }
 
+.filter-item.active:hover {
+  color: #fff;
+}
+
 /* Price Range */
 .price-slider {
   width: 100%;

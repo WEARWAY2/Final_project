@@ -126,6 +126,7 @@ const ProductDetails = () => {
     setIsAddingToCart(true);
     const item = {
       ...product,
+      category,
       quantity: qty,
       selectedColor,
       selectedSize,
@@ -150,7 +151,7 @@ const ProductDetails = () => {
   };
 
   const toggleWishlist = () => {
-    addToWishlist(product);
+    addToWishlist({ ...product, category });
     const isNowInWishlist = !isInWishlist(product.id);
     
     toast({
