@@ -103,13 +103,13 @@ const CategoryProducts = () => {
 
   // Handle URL parameter for category filter on initial load
   useEffect(() => {
-    const categoryParam = searchParams.get('category');
+    const categoryParam = searchParams.get("category");
     if (categoryParam) {
       setSelectedCategories([categoryParam]);
     }
-    
+
     // Handle feature parameter (New Arrivals, Best Sellers, Sale)
-    const featureParam = searchParams.get('feature');
+    const featureParam = searchParams.get("feature");
     if (featureParam) {
       setSelectedFeature(featureParam);
     }
@@ -122,7 +122,9 @@ const CategoryProducts = () => {
     // Filter by feature (New Arrivals, Best Sellers, Sale)
     if (selectedFeature === "new-arrivals") {
       // Get the newest products (assuming higher IDs are newer)
-      filtered = filtered.sort((a, b) => b.id - a.id).slice(0, Math.ceil(allProducts.length / 2));
+      filtered = filtered
+        .sort((a, b) => b.id - a.id)
+        .slice(0, Math.ceil(allProducts.length / 2));
     } else if (selectedFeature === "best-sellers") {
       // Get products with rating >= 4.5
       filtered = filtered.filter((product) => product.rating >= 4.5);
@@ -472,24 +474,40 @@ const CategoryProducts = () => {
                 </select>
               </div>
             </div>
-            
+
             {/* Feature Filter Buttons */}
             <div className="feature-filters">
               <button
-                className={`feature-btn ${selectedFeature === "new-arrivals" ? "active" : ""}`}
-                onClick={() => setSelectedFeature(selectedFeature === "new-arrivals" ? null : "new-arrivals")}
+                className={`feature-btn ${
+                  selectedFeature === "new-arrivals" ? "active" : ""
+                }`}
+                onClick={() =>
+                  setSelectedFeature(
+                    selectedFeature === "new-arrivals" ? null : "new-arrivals"
+                  )
+                }
               >
                 New Arrivals
               </button>
               <button
-                className={`feature-btn ${selectedFeature === "best-sellers" ? "active" : ""}`}
-                onClick={() => setSelectedFeature(selectedFeature === "best-sellers" ? null : "best-sellers")}
+                className={`feature-btn ${
+                  selectedFeature === "best-sellers" ? "active" : ""
+                }`}
+                onClick={() =>
+                  setSelectedFeature(
+                    selectedFeature === "best-sellers" ? null : "best-sellers"
+                  )
+                }
               >
                 Best Sellers
               </button>
               <button
-                className={`feature-btn ${selectedFeature === "sale" ? "active" : ""}`}
-                onClick={() => setSelectedFeature(selectedFeature === "sale" ? null : "sale")}
+                className={`feature-btn ${
+                  selectedFeature === "sale" ? "active" : ""
+                }`}
+                onClick={() =>
+                  setSelectedFeature(selectedFeature === "sale" ? null : "sale")
+                }
               >
                 Sale
               </button>
@@ -507,9 +525,15 @@ const CategoryProducts = () => {
                     </div>
                   </div>
                   <div className="product-info">
-                    <div className="product-name"><Skeleton className="line" /></div>
-                    <div className="product-rating"><Skeleton className="line" style={{ width: '40%' }} /></div>
-                    <div className="product-price"><Skeleton className="price" /></div>
+                    <div className="product-name">
+                      <Skeleton className="line" />
+                    </div>
+                    <div className="product-rating">
+                      <Skeleton className="line" style={{ width: "40%" }} />
+                    </div>
+                    <div className="product-price">
+                      <Skeleton className="price" />
+                    </div>
                   </div>
                 </div>
               ))

@@ -1,7 +1,7 @@
-import React from 'react';
-import './Skeleton.css';
+import React from "react";
+import "./Skeleton.css";
 
-const Skeleton = ({ className = '', style = {} }) => {
+const Skeleton = ({ className = "", style = {} }) => {
   return <div className={`skeleton ${className}`} style={style} />;
 };
 

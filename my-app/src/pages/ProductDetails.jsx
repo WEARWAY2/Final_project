@@ -23,8 +23,13 @@ const toast = ({ title, description }) => {
   if (title || description) console.log(title || "", description || "");
 };
 
-
-const formatPrice = (n) => `$${Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\.00$/, "")}`;
+const formatPrice = (n) =>
+  `$${Number(n)
+    .toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+    .replace(/\.00$/, "")}`;
 
 const ProductDetails = () => {
   const { category, id } = useParams();
@@ -35,7 +40,9 @@ const ProductDetails = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [qty, setQty] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(
+    product?.colors?.[0] || null
+  );
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || null);
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -43,7 +50,7 @@ const ProductDetails = () => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  
+
   const mainImageRef = useRef(null);
   const galleryRef = useRef(null);
 
@@ -129,13 +136,13 @@ const ProductDetails = () => {
       selectedColor,
       selectedSize,
     };
-    
+
     // Simulate async operation
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     addToCart(item);
     setIsAddingToCart(false);
-    
+
     toast({
       title: "Added to Cart! 🎉",
       description: `${product.name} has been added to your cart.`,
@@ -151,10 +158,10 @@ const ProductDetails = () => {
   const toggleWishlist = () => {
     addToWishlist({ ...product, category });
     const isNowInWishlist = !isInWishlist(product.id);
-    
+
     toast({
       title: isNowInWishlist ? "Added to Wishlist ❤️" : "Removed from Wishlist",
-      description: isNowInWishlist 
+      description: isNowInWishlist
         ? `${product.name} saved for later.`
         : `${product.name} removed from wishlist.`,
       duration: 2000,
@@ -163,7 +170,7 @@ const ProductDetails = () => {
 
   const handleShare = async () => {
     const url = window.location.href;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -172,7 +179,7 @@ const ProductDetails = () => {
           url: url,
         });
       } catch (err) {
-        if (err.name !== 'AbortError') {
+        if (err.name !== "AbortError") {
           navigator.clipboard.writeText(url);
           toast({
             title: "Link Copied! 📋",
@@ -204,13 +211,15 @@ const ProductDetails = () => {
         <span aria-hidden="true">›</span>
         <Link to={`/shop/${category}`}>{category}</Link>
         <span aria-hidden="true">›</span>
-        <span className="current" aria-current="page">{product.name}</span>
+        <span className="current" aria-current="page">
+          {product.name}
+        </span>
       </nav>
 
       <div className="pd-layout pd-3col">
         {/* Gallery (Left) */}
         <section className="pd-gallery" ref={galleryRef}>
-          <div 
+          <div
             className={"pd-main-image"}
             ref={mainImageRef}
             onTouchStart={handleTouchStart}
@@ -235,7 +244,7 @@ const ProductDetails = () => {
                   product.name
                 )}`;
               }}
-              style={{ display: imageLoaded ? 'block' : 'none' }}
+              style={{ display: imageLoaded ? "block" : "none" }}
             />
             {images.length > 1 && (
               <>
@@ -243,7 +252,9 @@ const ProductDetails = () => {
                   className="pd-nav prev"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentIndex((i) => (i - 1 + images.length) % images.length);
+                    setCurrentIndex(
+                      (i) => (i - 1 + images.length) % images.length
+                    );
                   }}
                   aria-label="Previous image"
                   disabled={isLoading}
@@ -268,7 +279,7 @@ const ProductDetails = () => {
             )}
             <div className="pd-zoom-hint">Click to view fullscreen</div>
           </div>
-          
+
           {images.length > 1 && (
             <div className="pd-thumbs" role="list">
               {images.map((src, idx) => (
@@ -279,8 +290,8 @@ const ProductDetails = () => {
                   aria-label={`Show image ${idx + 1}`}
                   role="listitem"
                 >
-                  <img 
-                    src={src} 
+                  <img
+                    src={src}
                     alt={`${product.name} thumbnail ${idx + 1}`}
                     loading="lazy"
                   />
@@ -303,7 +314,11 @@ const ProductDetails = () => {
             <>
               <h1 className="pd-title">{product.name}</h1>
               <div className="pd-meta">
-                <div className="pd-rating" role="img" aria-label={`Rated ${product.rating} out of 5 stars`}>
+                <div
+                  className="pd-rating"
+                  role="img"
+                  aria-label={`Rated ${product.rating} out of 5 stars`}
+                >
                   <span aria-hidden="true">★ {product.rating}</span>
                 </div>
                 {product.discount && (
@@ -313,31 +328,46 @@ const ProductDetails = () => {
                 )}
               </div>
               <div className="pd-price">
-                <span className="current" aria-label={`Current price ${formatPrice(product.price)}`}>
+                <span
+                  className="current"
+                  aria-label={`Current price ${formatPrice(product.price)}`}
+                >
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && (
-                  <span className="original" aria-label={`Original price ${formatPrice(product.originalPrice)}`}>
+                  <span
+                    className="original"
+                    aria-label={`Original price ${formatPrice(
+                      product.originalPrice
+                    )}`}
+                  >
                     {formatPrice(product.originalPrice)}
                   </span>
                 )}
               </div>
               <div className="pd-description">
-                Experience premium-quality {product.type?.toLowerCase()} with a {product.style?.toLowerCase()} style.
-                Crafted to be comfortable, durable and versatile for everyday wear.
+                Experience premium-quality {product.type?.toLowerCase()} with a{" "}
+                {product.style?.toLowerCase()} style. Crafted to be comfortable,
+                durable and versatile for everyday wear.
               </div>
               <div className="pd-details">
                 <div className="pd-row">
                   <span>Category</span>
-                  <span><strong>{product.type}</strong></span>
+                  <span>
+                    <strong>{product.type}</strong>
+                  </span>
                 </div>
                 <div className="pd-row">
                   <span>Style</span>
-                  <span><strong>{product.style}</strong></span>
+                  <span>
+                    <strong>{product.style}</strong>
+                  </span>
                 </div>
                 <div className="pd-row">
                   <span>Storefront</span>
-                  <span><strong>WearWay</strong></span>
+                  <span>
+                    <strong>WearWay</strong>
+                  </span>
                 </div>
               </div>
             </>
@@ -346,20 +376,29 @@ const ProductDetails = () => {
 
         {/* Actions (Right) */}
         <aside className="pd-actions-card">
-          <div className={`pd-stock ${isOutOfStock ? 'out-of-stock' : ''}`} role="status">
-            {isOutOfStock ? '❌ Out of Stock' : '✓ In Stock'}
+          <div
+            className={`pd-stock ${isOutOfStock ? "out-of-stock" : ""}`}
+            role="status"
+          >
+            {isOutOfStock ? "❌ Out of Stock" : "✓ In Stock"}
           </div>
-          
+
           {product.colors?.length > 0 && (
             <div className="pd-section">
               <div className="pd-label">
                 Color: <strong>{selectedColor}</strong>
               </div>
-              <div className="pd-color-list" role="radiogroup" aria-label="Select color">
+              <div
+                className="pd-color-list"
+                role="radiogroup"
+                aria-label="Select color"
+              >
                 {product.colors.map((c) => (
                   <button
                     key={c}
-                    className={`pd-chip pd-chip-color ${selectedColor === c ? "active" : ""}`}
+                    className={`pd-chip pd-chip-color ${
+                      selectedColor === c ? "active" : ""
+                    }`}
                     onClick={() => setSelectedColor(c)}
                     role="radio"
                     aria-checked={selectedColor === c}
@@ -371,13 +410,17 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-          
+
           {product.sizes?.length > 0 && (
             <div className="pd-section">
               <div className="pd-label">
                 Size: <strong>{selectedSize}</strong>
               </div>
-              <div className="pd-size-list" role="radiogroup" aria-label="Select size">
+              <div
+                className="pd-size-list"
+                role="radiogroup"
+                aria-label="Select size"
+              >
                 {product.sizes.map((s) => (
                   <button
                     key={s}
@@ -393,11 +436,15 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-          
+
           <div className="pd-qty">
             <span>Quantity</span>
-            <div className="pd-qty-controls" role="group" aria-label="Quantity controls">
-              <button 
+            <div
+              className="pd-qty-controls"
+              role="group"
+              aria-label="Quantity controls"
+            >
+              <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
                 aria-label="Decrease quantity"
                 disabled={qty <= 1}
@@ -405,8 +452,10 @@ const ProductDetails = () => {
               >
                 −
               </button>
-              <span className="pd-qty-value" aria-live="polite">{qty}</span>
-              <button 
+              <span className="pd-qty-value" aria-live="polite">
+                {qty}
+              </span>
+              <button
                 onClick={() => setQty((q) => q + 1)}
                 aria-label="Increase quantity"
                 className="pd-qty-btn"
@@ -415,10 +464,10 @@ const ProductDetails = () => {
               </button>
             </div>
           </div>
-          
+
           <div className="pd-actions">
-            <button 
-              className="btn-primary" 
+            <button
+              className="btn-primary"
               onClick={handleAddToCart}
               disabled={isOutOfStock || isAddingToCart}
               aria-busy={isAddingToCart}
@@ -428,21 +477,21 @@ const ProductDetails = () => {
                   <span className="spinner"></span> Adding...
                 </span>
               ) : (
-                'Add to Cart'
+                "Add to Cart"
               )}
             </button>
-            <button 
-              className="btn-buy" 
+            <button
+              className="btn-buy"
               onClick={handleBuyNow}
               disabled={isOutOfStock || isAddingToCart}
             >
               Buy Now
             </button>
           </div>
-          
+
           <div className="pd-secondary-actions">
-            <button 
-              className={`btn-wishlist ${isWish ? "active" : ""}`} 
+            <button
+              className={`btn-wishlist ${isWish ? "active" : ""}`}
               onClick={toggleWishlist}
               aria-label={isWish ? "Remove from wishlist" : "Add to wishlist"}
               aria-pressed={isWish}
@@ -452,12 +501,14 @@ const ProductDetails = () => {
               </span>
               {isWish ? "In Wishlist" : "Wishlist"}
             </button>
-            <button 
-              className="btn-share" 
+            <button
+              className="btn-share"
               onClick={handleShare}
               aria-label="Share product"
             >
-              <span className="btn-icon" aria-hidden="true">📤</span>
+              <span className="btn-icon" aria-hidden="true">
+                📤
+              </span>
               Share
             </button>
           </div>
@@ -466,22 +517,22 @@ const ProductDetails = () => {
 
       {/* Lightbox Modal */}
       {showLightbox && (
-        <div 
-          className="pd-lightbox" 
+        <div
+          className="pd-lightbox"
           onClick={() => setShowLightbox(false)}
           role="dialog"
           aria-modal="true"
           aria-label="Image gallery lightbox"
         >
-          <button 
+          <button
             className="pd-lightbox-close"
             onClick={() => setShowLightbox(false)}
             aria-label="Close lightbox"
           >
             ✕
           </button>
-          <img 
-            src={images[currentIndex]} 
+          <img
+            src={images[currentIndex]}
             alt={`${product.name} - Fullscreen view ${currentIndex + 1}`}
             onClick={(e) => e.stopPropagation()}
           />
