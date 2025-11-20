@@ -292,7 +292,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p className="copyright">WearWay © 2025, All Rights Reserved</p>
+          <p className="copyright">WearWay &copy; 2025, All Rights Reserved</p>
           <div className="payment-methods">
             <FaCcVisa className="payment-icon" aria-label="Visa" />
             <FaCcMastercard className="payment-icon" aria-label="Mastercard" />

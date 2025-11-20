@@ -1,5 +1,16 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  FaSearch,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaStar,
+  FaTimes,
+  FaChevronRight,
+  FaChevronLeft,
+  FaMinus,
+  FaPlus,
+} from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import { findProduct } from "../config/products";
 import "./ProductDetails.css";
@@ -114,7 +125,9 @@ const ProductDetails = () => {
     return (
       <div className="pd-not-found">
         <div className="pd-not-found-content">
-          <div className="pd-not-found-icon">🔍</div>
+          <div className="pd-not-found-icon">
+            <FaSearch size={60} />
+          </div>
           <h2>Product Not Found</h2>
           <p>Sorry, we couldn't find the product you're looking for.</p>
           <Link to={`/shop/${category}`} className="btn-link">
@@ -144,7 +157,7 @@ const ProductDetails = () => {
     setIsAddingToCart(false);
 
     toast({
-      title: "Added to Cart! 🎉",
+      title: "Added to Cart!",
       description: `${product.name} has been added to your cart.`,
       duration: 3000,
     });
@@ -160,7 +173,7 @@ const ProductDetails = () => {
     const isNowInWishlist = !isInWishlist(product.id);
 
     toast({
-      title: isNowInWishlist ? "Added to Wishlist ❤️" : "Removed from Wishlist",
+      title: isNowInWishlist ? "Added to Wishlist" : "Removed from Wishlist",
       description: isNowInWishlist
         ? `${product.name} saved for later.`
         : `${product.name} removed from wishlist.`,
@@ -182,7 +195,7 @@ const ProductDetails = () => {
         if (err.name !== "AbortError") {
           navigator.clipboard.writeText(url);
           toast({
-            title: "Link Copied! 📋",
+            title: "Link Copied!",
             description: "Product link copied to clipboard.",
             duration: 2000,
           });
@@ -191,7 +204,7 @@ const ProductDetails = () => {
     } else {
       navigator.clipboard.writeText(url);
       toast({
-        title: "Link Copied! 📋",
+        title: "Link Copied!",
         description: "Product link copied to clipboard.",
         duration: 2000,
       });
@@ -206,11 +219,17 @@ const ProductDetails = () => {
       {/* Breadcrumbs */}
       <nav className="pd-breadcrumbs" aria-label="breadcrumbs">
         <Link to="/">Home</Link>
-        <span aria-hidden="true">›</span>
+        <span aria-hidden="true">
+          <FaChevronRight size={12} />
+        </span>
         <Link to="/shop">Shop</Link>
-        <span aria-hidden="true">›</span>
+        <span aria-hidden="true">
+          <FaChevronRight size={12} />
+        </span>
         <Link to={`/shop/${category}`}>{category}</Link>
-        <span aria-hidden="true">›</span>
+        <span aria-hidden="true">
+          <FaChevronRight size={12} />
+        </span>
         <span className="current" aria-current="page">
           {product.name}
         </span>
@@ -259,7 +278,9 @@ const ProductDetails = () => {
                   aria-label="Previous image"
                   disabled={isLoading}
                 >
-                  <span aria-hidden="true">‹</span>
+                  <span aria-hidden="true">
+                    <FaChevronLeft size={24} />
+                  </span>
                 </button>
                 <button
                   className="pd-nav next"
@@ -270,7 +291,9 @@ const ProductDetails = () => {
                   aria-label="Next image"
                   disabled={isLoading}
                 >
-                  <span aria-hidden="true">›</span>
+                  <span aria-hidden="true">
+                    <FaChevronRight size={24} />
+                  </span>
                 </button>
                 <div className="pd-image-counter" aria-live="polite">
                   {currentIndex + 1} / {images.length}
@@ -319,7 +342,9 @@ const ProductDetails = () => {
                   role="img"
                   aria-label={`Rated ${product.rating} out of 5 stars`}
                 >
-                  <span aria-hidden="true">★ {product.rating}</span>
+                  <span aria-hidden="true">
+                    <FaStar /> {product.rating}
+                  </span>
                 </div>
                 {product.discount && (
                   <span className="pd-discount" role="status">
@@ -380,7 +405,15 @@ const ProductDetails = () => {
             className={`pd-stock ${isOutOfStock ? "out-of-stock" : ""}`}
             role="status"
           >
-            {isOutOfStock ? "❌ Out of Stock" : "✓ In Stock"}
+            {isOutOfStock ? (
+              <>
+                <FaTimesCircle /> Out of Stock
+              </>
+            ) : (
+              <>
+                <FaCheckCircle /> In Stock
+              </>
+            )}
           </div>
 
           {product.colors?.length > 0 && (
@@ -450,7 +483,7 @@ const ProductDetails = () => {
                 disabled={qty <= 1}
                 className="pd-qty-btn"
               >
-                −
+                <FaMinus />
               </button>
               <span className="pd-qty-value" aria-live="polite">
                 {qty}
@@ -460,7 +493,7 @@ const ProductDetails = () => {
                 aria-label="Increase quantity"
                 className="pd-qty-btn"
               >
-                +
+                <FaPlus />
               </button>
             </div>
           </div>
@@ -555,7 +588,7 @@ const ProductDetails = () => {
             onClick={() => setShowLightbox(false)}
             aria-label="Close lightbox"
           >
-            ✕
+            <FaTimes size={24} />
           </button>
           <img
             src={images[currentIndex]}

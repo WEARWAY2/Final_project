@@ -1,7 +1,18 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaBars, FaTimes, FaHeart, FaShoppingCart } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaHeart,
+  FaShoppingCart,
+  FaStar,
+  FaStarHalfAlt,
+  FaCheck,
+  FaChevronDown,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useCart } from "../context/CartContext";
 import "./CategoryProducts.css";
@@ -287,14 +298,14 @@ const CategoryProducts = () => {
     for (let i = 0; i < fullStars; i++) {
       stars.push(
         <span key={i} className="star filled">
-          ★
+          <FaStar />
         </span>
       );
     }
     if (hasHalfStar) {
       stars.push(
         <span key="half" className="star half">
-          ★
+          <FaStarHalfAlt />
         </span>
       );
     }
@@ -302,7 +313,7 @@ const CategoryProducts = () => {
     for (let i = 0; i < remaining; i++) {
       stars.push(
         <span key={`empty-${i}`} className="star empty">
-          ★
+          <FaStar />
         </span>
       );
     }
@@ -389,7 +400,9 @@ const CategoryProducts = () => {
                   title={color.name}
                 >
                   {selectedColors.includes(color.value) && (
-                    <span className="check-mark">✓</span>
+                    <span className="check-mark">
+                      <FaCheck />
+                    </span>
                   )}
                 </button>
               ))}
@@ -481,7 +494,7 @@ const CategoryProducts = () => {
                   <div className="custom-sort-selected">
                     {sortBy}
                     <span className="dropdown-arrow" style={{ marginLeft: 8 }}>
-                      ▼
+                      <FaChevronDown />
                     </span>
                   </div>
                   {sortDropdownOpen && (
@@ -779,7 +792,7 @@ const CategoryProducts = () => {
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                ← Previous
+                <FaChevronLeft /> Previous
               </button>
 
               {[...Array(totalPages)].map((_, index) => {
@@ -819,7 +832,7 @@ const CategoryProducts = () => {
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
-                Next →
+                Next <FaChevronRight />
               </button>
             </div>
           )}

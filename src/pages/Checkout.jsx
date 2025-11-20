@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaTrash, FaArrowRight, FaMinus, FaPlus } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import "./Checkout.css";
 
@@ -66,7 +67,10 @@ const Checkout = () => {
             <div className="empty-state">
               <p>Your cart is empty.</p>
               <Link to="/shop" className="link">
-                Continue shopping →
+                Continue shopping{" "}
+                <FaArrowRight
+                  style={{ marginLeft: "4px", fontSize: "0.9em" }}
+                />
               </Link>
             </div>
           ) : (
@@ -107,14 +111,14 @@ const Checkout = () => {
                       onClick={() => decreaseQuantity(item.id)}
                       aria-label="Decrease"
                     >
-                      −
+                      <FaMinus />
                     </button>
                     <span className="qty-val">{item.quantity}</span>
                     <button
                       onClick={() => increaseQuantity(item.id)}
                       aria-label="Increase"
                     >
-                      ＋
+                      <FaPlus />
                     </button>
                   </div>
                   <button
@@ -122,7 +126,7 @@ const Checkout = () => {
                     onClick={() => removeFromCart(item.id)}
                     aria-label="Remove"
                   >
-                    🗑
+                    <FaTrash />
                   </button>
                 </div>
               </div>
@@ -191,7 +195,7 @@ const Checkout = () => {
               navigate("/shop");
             }}
           >
-            Go to Checkout →
+            Go to Checkout <FaArrowRight style={{ marginLeft: "6px" }} />
           </button>
         </aside>
       </div>

@@ -315,7 +315,7 @@
   .checkout-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .order-summary {
     position: sticky;
     top: 20px;

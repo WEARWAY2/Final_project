@@ -12,6 +12,7 @@ import {
   FaBars,
   FaMoon,
   FaSun,
+  FaArrowRight,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import { useTheme } from "../context/ThemeContext";
@@ -51,17 +52,17 @@ const Header = () => {
   // Category data for dropdowns
   const categoryData = {
     men: {
-      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
+      featured: ["New Arrivals", "Best Sellers", "Sale"],
+      clothing: ["T-shirts", "Shirts", "Jeans", "Hoodie", "Shorts"],
     },
     women: {
-      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
+      featured: ["New Arrivals", "Best Sellers", "Sale"],
+      clothing: ["T-shirts", "Shirts", "Jeans", "Hoodie", "Shorts"],
     },
     kids: {
-      featured: ['New Arrivals', 'Best Sellers', 'Sale'],
-      clothing: ['T-shirts', 'Shirts', 'Jeans', 'Hoodie', 'Shorts']
-    }
+      featured: ["New Arrivals", "Best Sellers", "Sale"],
+      clothing: ["T-shirts", "Shirts", "Jeans", "Hoodie", "Shorts"],
+    },
   };
 
   // Scroll detection for navbar shrink effect
@@ -170,23 +171,30 @@ const Header = () => {
           <Link to="/" className="nav-item">
             Home
           </Link>
-          <div 
+          <div
             className="nav-item-wrapper"
-            onMouseEnter={() => setActiveDropdown('men')}
+            onMouseEnter={() => setActiveDropdown("men")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <Link to="/shop/men" className="nav-item">
               Men
             </Link>
-            {activeDropdown === 'men' && (
+            {activeDropdown === "men" && (
               <div className="dropdown-menu">
                 <div className="dropdown-content">
                   <div className="dropdown-column">
                     <h4>Featured</h4>
                     <ul>
-                      {categoryData.men.featured.map(item => (
+                      {categoryData.men.featured.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/men?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/men?feature=${item
+                              .toLowerCase()
+                              .replace(" ", "-")}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -194,9 +202,14 @@ const Header = () => {
                   <div className="dropdown-column">
                     <h4>Clothing</h4>
                     <ul>
-                      {categoryData.men.clothing.map(item => (
+                      {categoryData.men.clothing.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/men?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/men?category=${item}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -205,23 +218,30 @@ const Header = () => {
               </div>
             )}
           </div>
-          <div 
+          <div
             className="nav-item-wrapper"
-            onMouseEnter={() => setActiveDropdown('women')}
+            onMouseEnter={() => setActiveDropdown("women")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <Link to="/shop/women" className="nav-item">
               Women
             </Link>
-            {activeDropdown === 'women' && (
+            {activeDropdown === "women" && (
               <div className="dropdown-menu">
                 <div className="dropdown-content">
                   <div className="dropdown-column">
                     <h4>Featured</h4>
                     <ul>
-                      {categoryData.women.featured.map(item => (
+                      {categoryData.women.featured.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/women?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/women?feature=${item
+                              .toLowerCase()
+                              .replace(" ", "-")}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -229,9 +249,14 @@ const Header = () => {
                   <div className="dropdown-column">
                     <h4>Clothing</h4>
                     <ul>
-                      {categoryData.women.clothing.map(item => (
+                      {categoryData.women.clothing.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/women?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/women?category=${item}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -240,23 +265,30 @@ const Header = () => {
               </div>
             )}
           </div>
-          <div 
+          <div
             className="nav-item-wrapper"
-            onMouseEnter={() => setActiveDropdown('kids')}
+            onMouseEnter={() => setActiveDropdown("kids")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
             <Link to="/shop/kids" className="nav-item">
               Kids
             </Link>
-            {activeDropdown === 'kids' && (
+            {activeDropdown === "kids" && (
               <div className="dropdown-menu">
                 <div className="dropdown-content">
                   <div className="dropdown-column">
                     <h4>Featured</h4>
                     <ul>
-                      {categoryData.kids.featured.map(item => (
+                      {categoryData.kids.featured.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/kids?feature=${item.toLowerCase().replace(' ', '-')}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/kids?feature=${item
+                              .toLowerCase()
+                              .replace(" ", "-")}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -264,9 +296,14 @@ const Header = () => {
                   <div className="dropdown-column">
                     <h4>Clothing</h4>
                     <ul>
-                      {categoryData.kids.clothing.map(item => (
+                      {categoryData.kids.clothing.map((item) => (
                         <li key={item}>
-                          <Link to={`/shop/kids?category=${item}`} onClick={() => setActiveDropdown(null)}>{item}</Link>
+                          <Link
+                            to={`/shop/kids?category=${item}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -332,7 +369,10 @@ const Header = () => {
                       setIsSearchOpen(false);
                     }}
                   >
-                    View all products →
+                    View all products{" "}
+                    <FaArrowRight
+                      style={{ marginLeft: "6px", fontSize: "0.9em" }}
+                    />
                   </Link>
                 </div>
               )}
@@ -355,8 +395,8 @@ const Header = () => {
             aria-label="Toggle Dark Mode"
             onClick={toggleTheme}
           >
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: 15 }} 
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.95 }}
               initial={{ rotate: 0 }}
               animate={{ rotate: isDark ? 180 : 0 }}
@@ -438,7 +478,7 @@ const Header = () => {
           >
             Kids
           </Link>
-          
+
           {/* Mobile Menu Action Icons (for screens < 410px) */}
           <div className="mobile-menu-actions">
             <button
@@ -448,8 +488,8 @@ const Header = () => {
                 toggleTheme();
               }}
             >
-              <motion.div 
-                whileHover={{ scale: 1.1, rotate: 15 }} 
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 15 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ rotate: 0 }}
                 animate={{ rotate: isDark ? 180 : 0 }}
@@ -457,7 +497,7 @@ const Header = () => {
               >
                 {isDark ? <FaSun size={22} /> : <FaMoon size={22} />}
               </motion.div>
-              <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+              <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
             </button>
             <button
               className="mobile-action-button"
@@ -467,11 +507,16 @@ const Header = () => {
                 setIsMobileMenuOpen(false);
               }}
             >
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <FaShoppingCart size={22} />
               </motion.div>
               <span>Cart</span>
-              {cartCount > 0 && <span className="mobile-badge">{cartCount}</span>}
+              {cartCount > 0 && (
+                <span className="mobile-badge">{cartCount}</span>
+              )}
             </button>
             <button
               className="mobile-action-button"
@@ -505,7 +550,10 @@ const Header = () => {
                 setIsMobileMenuOpen(false);
               }}
             >
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <FaUser size={22} />
               </motion.div>
               <span>Profile</span>
@@ -563,13 +611,13 @@ const Header = () => {
               <div className="items-list">
                 {cartItems.map((item) => (
                   <div key={item.id} className="drawer-item cart-item">
-                    <div 
+                    <div
                       className="item-image"
                       onClick={() => {
                         setIsCartOpen(false);
-                        navigate(`/shop/${item.category || 'men'}/${item.id}`);
+                        navigate(`/shop/${item.category || "men"}/${item.id}`);
                       }}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                       title="View product details"
                     >
                       <img
@@ -589,14 +637,18 @@ const Header = () => {
                       />
                     </div>
                     <div className="item-details">
-                      <h3 
+                      <h3
                         onClick={() => {
                           setIsCartOpen(false);
-                          navigate(`/shop/${item.category || 'men'}/${item.id}`);
+                          navigate(
+                            `/shop/${item.category || "men"}/${item.id}`
+                          );
                         }}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: "pointer" }}
                         title="View product details"
-                      >{item.name}</h3>
+                      >
+                        {item.name}
+                      </h3>
                       <p className="item-price">
                         ${item.price}
                         {item.originalPrice && (
@@ -713,13 +765,13 @@ const Header = () => {
               <div className="items-list">
                 {wishlistItems.map((item) => (
                   <div key={item.id} className="drawer-item wishlist-item">
-                    <div 
+                    <div
                       className="item-image"
                       onClick={() => {
                         setIsWishlistOpen(false);
-                        navigate(`/shop/${item.category || 'men'}/${item.id}`);
+                        navigate(`/shop/${item.category || "men"}/${item.id}`);
                       }}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: "pointer" }}
                       title="View product details"
                     >
                       <img
@@ -739,14 +791,18 @@ const Header = () => {
                       />
                     </div>
                     <div className="item-details">
-                      <h3 
+                      <h3
                         onClick={() => {
                           setIsWishlistOpen(false);
-                          navigate(`/shop/${item.category || 'men'}/${item.id}`);
+                          navigate(
+                            `/shop/${item.category || "men"}/${item.id}`
+                          );
                         }}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: "pointer" }}
                         title="View product details"
-                      >{item.name}</h3>
+                      >
+                        {item.name}
+                      </h3>
                       <div className="item-price-row">
                         <p className="item-price">${item.price}</p>
                         {item.originalPrice && (
