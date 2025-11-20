@@ -24,7 +24,7 @@ WearWay Ecommerce is a modern, scalable e-commerce website designed for a seamle
 
 ## 🚀 Live Demo
 
-👉 [View Demo on localhost](http://localhost:5173/)
+👉 [View Demo on vercel](https://final-project-delta-self.vercel.app/)
 
 ---
 
