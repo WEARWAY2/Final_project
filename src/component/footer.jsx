@@ -56,16 +56,20 @@ const Footer = () => {
                       <motion.div
                         initial={{ scale: 1, opacity: 1 }}
                         animate={{ x: [0, 3, 0] }}
-                        exit={{ 
+                        exit={{
                           x: 150,
                           y: -10,
                           scale: 1.2,
                           rotate: 15,
-                          opacity: 0
+                          opacity: 0,
                         }}
                         transition={{
-                          x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                          exit: { duration: 0.6, ease: "easeOut" }
+                          x: {
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          },
+                          exit: { duration: 0.6, ease: "easeOut" },
                         }}
                       >
                         <FaEnvelope size={20} color="#666" />
@@ -94,19 +98,23 @@ const Footer = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
                       >
                         <motion.div
-                          animate={{ 
+                          animate={{
                             x: [0, 300],
                             y: [0, -80],
                             rotate: [0, 360],
-                            scale: [1, 1.5, 0]
+                            scale: [1, 1.5, 0],
                           }}
-                          transition={{ 
-                            duration: 1.5, 
+                          transition={{
+                            duration: 1.5,
                             ease: "easeInOut",
-                            times: [0, 0.6, 1]
+                            times: [0, 0.6, 1],
                           }}
                         >
                           <FaEnvelope size={20} />
