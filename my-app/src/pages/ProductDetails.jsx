@@ -3,8 +3,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { findProduct } from "../config/products";
 import "./ProductDetails.css";
+import Skeleton from "../component/Skeleton";
 
-// Lightweight local fallbacks for toast and Skeleton to avoid missing alias imports
+// Lightweight local fallback for toast to avoid missing alias imports
 const toast = ({ title, description }) => {
   try {
     // Prefer Notification if available and permitted
@@ -22,9 +23,6 @@ const toast = ({ title, description }) => {
   if (title || description) console.log(title || "", description || "");
 };
 
-const Skeleton = ({ className = "" }) => (
-  <div className={className} style={{ backgroundColor: "#f2f2f2", borderRadius: 8 }} />
-);
 
 const formatPrice = (n) => `$${Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\.00$/, "")}`;
 

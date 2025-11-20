@@ -6,6 +6,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useCart } from "../context/CartContext";
 import "./CategoryProducts.css";
 import { PRODUCTS } from "../config/products";
+import Skeleton from "../component/Skeleton";
 
 const CategoryProducts = () => {
   const { category } = useParams();
@@ -92,6 +93,13 @@ const CategoryProducts = () => {
     () => PRODUCTS[category] || PRODUCTS.men,
     [category]
   );
+
+  // Loading state to show skeletons briefly for UX
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 400);
+    return () => clearTimeout(t);
+  }, [category, itemsPerPage]);
 
   // Handle URL parameter for category filter on initial load
   useEffect(() => {
@@ -489,7 +497,23 @@ const CategoryProducts = () => {
           </div>
 
           <div className="products-grid">
-            {currentProducts.length > 0 ? (
+            {isLoading ? (
+              // render skeleton placeholders equal to itemsPerPage
+              Array.from({ length: itemsPerPage }).map((_, index) => (
+                <div key={`skeleton-${index}`} className="product-card">
+                  <div className="product-image">
+                    <div className="product-image-slider">
+                      <Skeleton className="image" />
+                    </div>
+                  </div>
+                  <div className="product-info">
+                    <div className="product-name"><Skeleton className="line" /></div>
+                    <div className="product-rating"><Skeleton className="line" style={{ width: '40%' }} /></div>
+                    <div className="product-price"><Skeleton className="price" /></div>
+                  </div>
+                </div>
+              ))
+            ) : currentProducts.length > 0 ? (
               currentProducts.map((product, index) => {
                 const images = product.images || [product.image];
                 const currentIndex = currentImageIndex[product.id] || 0;
