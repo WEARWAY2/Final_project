@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -178,7 +179,7 @@ const Footer = () => {
               wear. From women to men.
             </p>
             <div className="social-icons">
-              <a href="#" className="social-icon" aria-label="Twitter">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter">
                 <motion.div
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
@@ -186,7 +187,7 @@ const Footer = () => {
                   <FaTwitter size={24} />
                 </motion.div>
               </a>
-              <a href="#" className="social-icon" aria-label="Facebook">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Facebook">
                 <motion.div
                   whileHover={{ scale: 1.2, rotate: -5 }}
                   whileTap={{ scale: 0.9 }}
@@ -194,7 +195,7 @@ const Footer = () => {
                   <FaFacebook size={24} />
                 </motion.div>
               </a>
-              <a href="#" className="social-icon" aria-label="Instagram">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
                 <motion.div
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
@@ -202,7 +203,7 @@ const Footer = () => {
                   <FaInstagram size={24} />
                 </motion.div>
               </a>
-              <a href="#" className="social-icon" aria-label="GitHub">
+              <a href="https://github.com/WEARWAY2/Final_project" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
                 <motion.div
                   whileHover={{ scale: 1.2, rotate: -5 }}
                   whileTap={{ scale: 0.9 }}
@@ -218,16 +219,16 @@ const Footer = () => {
             <h4 className="footer-heading">COMPANY</h4>
             <ul className="footer-links">
               <li>
-                <a href="#about">About</a>
+                <Link to="/">About</Link>
               </li>
               <li>
-                <a href="#features">Features</a>
+                <Link to="/shop">Shop</Link>
               </li>
               <li>
-                <a href="#works">Works</a>
+                <Link to="/shop/men">Men's Collection</Link>
               </li>
               <li>
-                <a href="#career">Career</a>
+                <Link to="/shop/women">Women's Collection</Link>
               </li>
             </ul>
           </div>
@@ -237,10 +238,10 @@ const Footer = () => {
             <h4 className="footer-heading">HELP</h4>
             <ul className="footer-links">
               <li>
-                <a href="#customer-support">Customer Support</a>
+                <Link to="/checkout">Checkout</Link>
               </li>
               <li>
-                <a href="#delivery">Delivery Details</a>
+                <Link to="/shop">Delivery Details</Link>
               </li>
               <li>
                 <a href="#terms">Terms & Conditions</a>
@@ -253,38 +254,38 @@ const Footer = () => {
 
           {/* FAQ Links */}
           <div className="footer-column">
-            <h4 className="footer-heading">FAQ</h4>
+            <h4 className="footer-heading">SHOP</h4>
             <ul className="footer-links">
               <li>
-                <a href="#account">Account</a>
+                <Link to="/shop/men">Men's Fashion</Link>
               </li>
               <li>
-                <a href="#manage-deliveries">Manage Deliveries</a>
+                <Link to="/shop/women">Women's Fashion</Link>
               </li>
               <li>
-                <a href="#orders">Orders</a>
+                <Link to="/shop/kids">Kids' Fashion</Link>
               </li>
               <li>
-                <a href="#payments">Payments</a>
+                <Link to="/shop">All Products</Link>
               </li>
             </ul>
           </div>
 
           {/* Resources Links */}
           <div className="footer-column">
-            <h4 className="footer-heading">RESOURCES</h4>
+            <h4 className="footer-heading">CUSTOMER</h4>
             <ul className="footer-links">
               <li>
-                <a href="#ebooks">Free eBooks</a>
+                <Link to="/checkout">My Cart</Link>
               </li>
               <li>
-                <a href="#tutorial">Development Tutorial</a>
+                <Link to="/checkout">Checkout</Link>
               </li>
               <li>
-                <a href="#blog">How to - Blog</a>
+                <Link to="/">Track Order</Link>
               </li>
               <li>
-                <a href="#playlist">Youtube Playlist</a>
+                <a href="#help">Help Center</a>
               </li>
             </ul>
           </div>

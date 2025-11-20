@@ -261,6 +261,8 @@ const Home = () => {
       title: "Summer Essentials",
       description: "Light & breezy styles for warm days",
       image: PRODUCTS.women[0]?.image || heroImage,
+      category: "women",
+      style: "Casual",
     },
     {
       id: "workwear",
@@ -268,6 +270,8 @@ const Home = () => {
       title: "Workwear",
       description: "Professional looks that mean business",
       image: PRODUCTS.men[4]?.image || heroImage,
+      category: "men",
+      style: "Formal",
     },
     {
       id: "streetwear",
@@ -275,6 +279,8 @@ const Home = () => {
       title: "Streetwear",
       description: "Urban style with attitude",
       image: PRODUCTS.kids[2]?.image || heroImage,
+      category: "kids",
+      style: "Casual",
     },
   ];
 
@@ -285,12 +291,15 @@ const Home = () => {
     });
   };
 
-  const handleCollectionClick = (collection) => {
+  const handleCollectionClick = (e, collection) => {
+    e.preventDefault();
     window.analytics?.track("featured_collection_clicked", {
       collectionId: collection.id,
       collectionName: collection.title,
       slug: collection.slug,
     });
+    // Navigate to the category page
+    navigate(`/shop/${collection.category}`);
   };
 
   return (
@@ -403,11 +412,17 @@ const Home = () => {
           </div>
           <div className="collections-grid">
             {featuredCollections.map((collection) => (
-              <Link
+              <div
                 key={collection.id}
-                to={`/shop/collection/${collection.slug}`}
                 className="collection-tile"
-                onClick={() => handleCollectionClick(collection)}
+                onClick={(e) => handleCollectionClick(e, collection)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleCollectionClick(e, collection);
+                  }
+                }}
                 aria-label={`Browse ${collection.title} collection: ${collection.description}`}
                 style={{ backgroundImage: `url(${collection.image})` }}
               >
@@ -417,7 +432,7 @@ const Home = () => {
                   <p>{collection.description}</p>
                   <span className="collection-cta">Explore &rarr;</span>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
