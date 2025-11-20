@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 import {
   FaPaypal,
@@ -15,6 +16,7 @@ import {
 import "./footer.css";
 
 const Footer = () => {
+  const { theme } = useTheme();
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -51,7 +53,16 @@ const Footer = () => {
         <div className="footer-content">
           {/* Company Info */}
           <div className="footer-column company-info">
-            <h3 className="footer-logo">WearWay</h3>
+            <img
+              src={
+                theme === "dark"
+                  ? import.meta.env.BASE_URL + "src/assets/logo.png"
+                  : import.meta.env.BASE_URL + "src/assets/logo_black.png"
+              }
+              alt="WearWay Logo"
+              className="footer-logo"
+              style={{ width: 120, height: "auto" }}
+            />
             <p className="company-description">
               We have clothes that suits your style and which you're proud to
               wear. From women to men.
