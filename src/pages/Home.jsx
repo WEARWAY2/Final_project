@@ -1,6 +1,6 @@
 // Home.jsx - Enhanced Version with Accessibility & Performance
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaTruck, FaUndo, FaLock, FaHeadset, FaStar } from "react-icons/fa";
@@ -15,6 +15,70 @@ import gucciLogo from "../assets/gucci-logo-1 1.svg";
 import pradaLogo from "../assets/prada-logo-1 1.svg";
 import calvinKleinLogo from "../assets/Group.svg";
 import { PRODUCTS } from "../config/products";
+
+// ============================================
+// CountUp Component - Animated Number Counter
+// ============================================
+const CountUp = ({ end, duration = 2000, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const countRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          
+          const startTime = Date.now();
+          const endValue = parseInt(end.toString().replace(/,/g, ""));
+          
+          const animate = () => {
+            const now = Date.now();
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const currentCount = Math.floor(easeOutQuart * endValue);
+            
+            setCount(currentCount);
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setCount(endValue);
+            }
+          };
+          
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => {
+      if (countRef.current) {
+        observer.unobserve(countRef.current);
+      }
+    };
+  }, [end, duration, hasAnimated]);
+
+  const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  return (
+    <span ref={countRef}>
+      {formatNumber(count)}
+      {suffix}
+    </span>
+  );
+};
 
 // ============================================
 // AccessibleProductCard Component
@@ -250,17 +314,23 @@ const Home = () => {
             </Link>
             <div className="hero-stats">
               <div className="stat-item">
-                <h3 className="stat-number">200+</h3>
+                <h3 className="stat-number">
+                  <CountUp end={200} duration={2000} suffix="+" />
+                </h3>
                 <p className="stat-label">International Brands</p>
               </div>
               <div className="stat-divider"></div>
               <div className="stat-item">
-                <h3 className="stat-number">2,000+</h3>
+                <h3 className="stat-number">
+                  <CountUp end={2000} duration={2500} suffix="+" />
+                </h3>
                 <p className="stat-label">High-Quality Products</p>
               </div>
               <div className="stat-divider"></div>
               <div className="stat-item">
-                <h3 className="stat-number">30,000+</h3>
+                <h3 className="stat-number">
+                  <CountUp end={30000} duration={2500} suffix="+" />
+                </h3>
                 <p className="stat-label">Happy Customers</p>
               </div>
             </div>
