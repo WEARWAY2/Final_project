@@ -17,18 +17,23 @@
   padding: 0;
 
   /* --- CORRECTED PART --- */
-  opacity: 0; /* Start hidden */
-  transform: scale(0.9); /* Start slightly smaller */
-  pointer-events: none; /* Not clickable when hidden */
+  opacity: 0;
+  /* Start hidden */
+  transform: scale(0.9);
+  /* Start slightly smaller */
+  pointer-events: none;
+  /* Not clickable when hidden */
   transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease,
-    box-shadow 0.3s ease; /* Animate both properties */
+    box-shadow 0.3s ease;
+  /* Animate both properties */
 }
 
 /* This class is added by React to make the button appear */
 .back-to-top.visible {
   opacity: 1;
   transform: scale(1);
-  pointer-events: auto; /* Make it clickable again */
+  pointer-events: auto;
+  /* Make it clickable again */
 }
 
 .back-to-top:hover {
