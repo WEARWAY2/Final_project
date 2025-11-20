@@ -469,7 +469,9 @@ const CategoryProducts = () => {
                   </button>
                 </div>
                 <div
-                  className={`custom-sort-dropdown${sortDropdownOpen ? " open" : ""}`}
+                  className={`custom-sort-dropdown${
+                    sortDropdownOpen ? " open" : ""
+                  }`}
                   ref={sortRef}
                   tabIndex={0}
                   onClick={() => setSortDropdownOpen((open) => !open)}
@@ -483,28 +485,36 @@ const CategoryProducts = () => {
                     </span>
                   </div>
                   {sortDropdownOpen && (
-                    <ul className="custom-sort-options" style={{
-                      position: "absolute",
-                      top: "100%",
-                      left: 0,
-                      right: 0,
-                      background: "var(--dropdown-bg, #fff)",
-                      border: "1px solid #e0e0e0",
-                      borderRadius: 8,
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-                      zIndex: 10,
-                      margin: 0,
-                      padding: 0,
-                      listStyle: "none",
-                    }}>
+                    <ul
+                      className="custom-sort-options"
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        right: 0,
+                        background: "var(--dropdown-bg, #fff)",
+                        border: "1px solid #e0e0e0",
+                        borderRadius: 8,
+                        boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                        zIndex: 10,
+                        margin: 0,
+                        padding: 0,
+                        listStyle: "none",
+                      }}
+                    >
                       {sortOptions.map((option) => (
                         <li
                           key={option}
-                          className={`custom-sort-option${option === sortBy ? " selected" : ""}`}
+                          className={`custom-sort-option${
+                            option === sortBy ? " selected" : ""
+                          }`}
                           style={{
                             padding: "10px 18px",
                             cursor: "pointer",
-                            background: option === sortBy ? "var(--primary, #667eea)" : "inherit",
+                            background:
+                              option === sortBy
+                                ? "var(--primary, #667eea)"
+                                : "inherit",
                             color: option === sortBy ? "#fff" : "inherit",
                             fontWeight: option === sortBy ? 600 : 400,
                             borderRadius: 6,
