@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaPaypal,
   FaCcMastercard,
@@ -12,42 +12,144 @@ import {
   FaFacebook,
   FaInstagram,
   FaGithub,
+  FaCheckCircle,
 } from "react-icons/fa";
 import "./footer.css";
 
 const Footer = () => {
   const { theme } = useTheme();
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsSubscribed(true);
+      setIsAnimating(false);
+    }, 1500);
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         {/* Newsletter Section */}
-        <div className="newsletter-section">
-          <h2 className="newsletter-title">
-            STAY UPTO DATE ABOUT OUR LATEST OFFERS
-          </h2>
-          <div className="newsletter-form">
-            <div className="email-input-wrapper">
+        <AnimatePresence mode="wait">
+          {!isSubscribed ? (
+            <motion.div
+              key="subscribe-form"
+              className="newsletter-section"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="newsletter-title">
+                STAY UPTO DATE ABOUT OUR LATEST OFFERS
+              </h2>
+              <form className="newsletter-form" onSubmit={handleSubscribe}>
+                <div className="email-input-wrapper">
+                  <AnimatePresence>
+                    {!isAnimating && (
+                      <motion.div
+                        initial={{ scale: 1, opacity: 1 }}
+                        animate={{ x: [0, 3, 0] }}
+                        exit={{ 
+                          x: 150,
+                          y: -10,
+                          scale: 1.2,
+                          rotate: 15,
+                          opacity: 0
+                        }}
+                        transition={{
+                          x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                          exit: { duration: 0.6, ease: "easeOut" }
+                        }}
+                      >
+                        <FaEnvelope size={20} color="#666" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="email-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isAnimating}
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="subscribe-button"
+                  disabled={isAnimating}
+                >
+                  <AnimatePresence mode="wait">
+                    {isAnimating ? (
+                      <motion.span
+                        key="sending"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                      >
+                        <motion.div
+                          animate={{ 
+                            x: [0, 300],
+                            y: [0, -80],
+                            rotate: [0, 360],
+                            scale: [1, 1.5, 0]
+                          }}
+                          transition={{ 
+                            duration: 1.5, 
+                            ease: "easeInOut",
+                            times: [0, 0.6, 1]
+                          }}
+                        >
+                          <FaEnvelope size={20} />
+                        </motion.div>
+                        Sending...
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="subscribe"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        Subscribe to Newsletter
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="subscribed-message"
+              className="newsletter-section subscribed-state"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <motion.div
-                animate={{ x: [0, 3, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               >
-                <FaEnvelope size={20} color="#666" />
+                <FaCheckCircle size={48} color="#22c55e" />
               </motion.div>
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="email-input"
-              />
-            </div>
-            <button className="subscribe-button">
-              Subscribe to Newsletter
-            </button>
-          </div>
-        </div>
+              <h2 className="newsletter-title">Thank You for Subscribing!</h2>
+              <p className="subscribed-message">
+                We'll be with you on your style journey. Stay tuned for
+                exclusive offers and updates!
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Main Footer Content */}
         <div className="footer-content">

@@ -36,9 +36,11 @@
   margin: 0;
   line-height: 1.2;
 }
+
 .dark-theme .newsletter-title {
   color: black !important;
 }
+
 .newsletter-form {
   display: flex;
   gap: 1rem;
@@ -93,6 +95,41 @@
 .subscribe-button:hover {
   background-color: var(--bg-secondary);
   transform: translateY(-2px);
+}
+
+.subscribe-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.subscribe-button {
+  position: relative;
+  overflow: visible;
+}
+
+/* Subscribed State */
+.newsletter-section.subscribed-state {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.newsletter-section.subscribed-state .newsletter-title {
+  max-width: 100%;
+}
+
+.subscribed-message {
+  font-size: 1.1rem;
+  color: var(--bg-primary);
+  max-width: 500px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.dark-theme .subscribed-message {
+  color: black !important;
 }
 
 /* Footer Content */
