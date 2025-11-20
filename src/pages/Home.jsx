@@ -29,28 +29,28 @@ const CountUp = ({ end, duration = 2000, suffix = "" }) => {
       (entries) => {
         if (entries[0].isIntersecting && !hasAnimated) {
           setHasAnimated(true);
-          
+
           const startTime = Date.now();
           const endValue = parseInt(end.toString().replace(/,/g, ""));
-          
+
           const animate = () => {
             const now = Date.now();
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            
+
             // Easing function for smooth animation
             const easeOutQuart = 1 - Math.pow(1 - progress, 4);
             const currentCount = Math.floor(easeOutQuart * endValue);
-            
+
             setCount(currentCount);
-            
+
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
               setCount(endValue);
             }
           };
-          
+
           requestAnimationFrame(animate);
         }
       },
@@ -349,7 +349,7 @@ const Home = () => {
                   ease: "easeInOut",
                 }}
               >
-                <IoSparkles size={56}  />
+                <IoSparkles size={56} />
               </motion.div>
             </div>
             <div className="star-decoration star-small">
@@ -433,7 +433,6 @@ const Home = () => {
             <h2 id="top-selling-title" className="section-title">
               Our Top Selling Products
             </h2>
-          
           </div>
           <div className="top-selling-grid">
             {topSellingProducts.map((product, index) => {
