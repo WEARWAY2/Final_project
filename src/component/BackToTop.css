@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-md);
-  z-index: 9999;
+  z-index: 999;
   padding: 0;
 
   /* --- CORRECTED PART --- */
@@ -54,7 +54,8 @@
     width: 45px;
     height: 45px;
     bottom: 20px;
-    right: 20px;
+    left: 20px;
+    right: auto;
   }
 
   .back-to-top svg {
