@@ -128,3 +128,49 @@ a {
 button {
   font: inherit;
 }
+/* ========================= */
+/* THEME-AWARE CUSTOM SCROLLBAR */
+/* ========================= */
+
+:root {
+  --scrollbar-track: var(--bg-secondary);
+  --scrollbar-thumb: var(--text-tertiary);
+  --scrollbar-thumb-hover: var(--accent-primary);
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Smooth transition when switching themes */
+html,
+body,
+* {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    scrollbar-color 0.3s ease;
+}
