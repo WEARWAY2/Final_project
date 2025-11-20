@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaBars, FaTimes, FaHeart, FaShoppingCart } from "react-icons/fa";
@@ -20,6 +20,31 @@ const CategoryProducts = () => {
   const [selectedStyles, setSelectedStyles] = useState([]);
   const [selectedFeature, setSelectedFeature] = useState(null); // "new-arrivals", "best-sellers", "sale"
   const [sortBy, setSortBy] = useState("Most Popular");
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+  const sortOptions = [
+    "Most Popular",
+    "Newest",
+    "Price: Low to High",
+    "Price: High to Low",
+  ];
+  const sortRef = useRef(null);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setSortDropdownOpen(false);
+      }
+    };
+    if (sortDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sortDropdownOpen]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -406,25 +431,6 @@ const CategoryProducts = () => {
               ))}
             </div>
           </div>
-
-          <button
-            className="apply-filter-btn"
-            onClick={() => {
-              applyFilters();
-              setIsSidebarOpen(false);
-            }}
-          >
-            Apply Filter
-          </button>
-          <button
-            className="reset-filter-btn"
-            onClick={() => {
-              resetFilters();
-              setIsSidebarOpen(false);
-            }}
-          >
-            Reset Filters
-          </button>
         </aside>
 
         {/* Products Grid */}
@@ -462,16 +468,59 @@ const CategoryProducts = () => {
                     12 / page
                   </button>
                 </div>
-                <select
-                  className="sort-select"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
+                <div
+                  className={`custom-sort-dropdown${sortDropdownOpen ? " open" : ""}`}
+                  ref={sortRef}
+                  tabIndex={0}
+                  onClick={() => setSortDropdownOpen((open) => !open)}
+                  onBlur={() => setSortDropdownOpen(false)}
+                  style={{ position: "relative", minWidth: 170 }}
                 >
-                  <option>Most Popular</option>
-                  <option>Newest</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                </select>
+                  <div className="custom-sort-selected">
+                    {sortBy}
+                    <span className="dropdown-arrow" style={{ marginLeft: 8 }}>
+                      ▼
+                    </span>
+                  </div>
+                  {sortDropdownOpen && (
+                    <ul className="custom-sort-options" style={{
+                      position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      right: 0,
+                      background: "var(--dropdown-bg, #fff)",
+                      border: "1px solid #e0e0e0",
+                      borderRadius: 8,
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                      zIndex: 10,
+                      margin: 0,
+                      padding: 0,
+                      listStyle: "none",
+                    }}>
+                      {sortOptions.map((option) => (
+                        <li
+                          key={option}
+                          className={`custom-sort-option${option === sortBy ? " selected" : ""}`}
+                          style={{
+                            padding: "10px 18px",
+                            cursor: "pointer",
+                            background: option === sortBy ? "var(--primary, #667eea)" : "inherit",
+                            color: option === sortBy ? "#fff" : "inherit",
+                            fontWeight: option === sortBy ? 600 : 400,
+                            borderRadius: 6,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSortBy(option);
+                            setSortDropdownOpen(false);
+                          }}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
 
