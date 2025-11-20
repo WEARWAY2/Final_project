@@ -606,8 +606,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* --- Newsletter Band --- */}
       <NewsletterBand />
     </main>
   );

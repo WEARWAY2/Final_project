@@ -563,15 +563,7 @@ const Header = () => {
               <div className="items-list">
                 {cartItems.map((item) => (
                   <div key={item.id} className="drawer-item cart-item">
-                    <div 
-                      className="item-image"
-                      onClick={() => {
-                        setIsCartOpen(false);
-                        navigate(`/shop/${item.category || 'men'}/${item.id}`);
-                      }}
-                      style={{ cursor: 'pointer' }}
-                      title="View product details"
-                    >
+                    <div className="item-image">
                       <img
                         src={
                           item.image ||
@@ -589,14 +581,7 @@ const Header = () => {
                       />
                     </div>
                     <div className="item-details">
-                      <h3 
-                        onClick={() => {
-                          setIsCartOpen(false);
-                          navigate(`/shop/${item.category || 'men'}/${item.id}`);
-                        }}
-                        style={{ cursor: 'pointer' }}
-                        title="View product details"
-                      >{item.name}</h3>
+                      <h3>{item.name}</h3>
                       <p className="item-price">
                         ${item.price}
                         {item.originalPrice && (
@@ -713,15 +698,7 @@ const Header = () => {
               <div className="items-list">
                 {wishlistItems.map((item) => (
                   <div key={item.id} className="drawer-item wishlist-item">
-                    <div 
-                      className="item-image"
-                      onClick={() => {
-                        setIsWishlistOpen(false);
-                        navigate(`/shop/${item.category || 'men'}/${item.id}`);
-                      }}
-                      style={{ cursor: 'pointer' }}
-                      title="View product details"
-                    >
+                    <div className="item-image">
                       <img
                         src={
                           item.image ||
@@ -739,14 +716,7 @@ const Header = () => {
                       />
                     </div>
                     <div className="item-details">
-                      <h3 
-                        onClick={() => {
-                          setIsWishlistOpen(false);
-                          navigate(`/shop/${item.category || 'men'}/${item.id}`);
-                        }}
-                        style={{ cursor: 'pointer' }}
-                        title="View product details"
-                      >{item.name}</h3>
+                      <h3>{item.name}</h3>
                       <div className="item-price-row">
                         <p className="item-price">${item.price}</p>
                         {item.originalPrice && (
