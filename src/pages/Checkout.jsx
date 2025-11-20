@@ -51,7 +51,10 @@ const Checkout = () => {
   };
 
   return (
-    <div className="checkout-page">
+    <div
+      className="checkout-page"
+      style={{ borderRadius: "12px", overflow: "hidden"}}
+    >
       <div className="checkout-header">
         <h1>YOUR CART</h1>
       </div>
@@ -71,6 +74,7 @@ const Checkout = () => {
               <div key={item.id} className="ci-row">
                 <img
                   className="ci-thumb"
+                  style={{ borderRadius: "8px" }}
                   src={
                     item.image ||
                     (item.images && item.images[0]) ||
@@ -127,7 +131,7 @@ const Checkout = () => {
         </section>
 
         {/* Right: Order summary */}
-        <aside className="order-summary">
+        <aside className="order-summary" style={{ borderRadius: "12px" }}>
           <h2>Order Summary</h2>
           <div className="os-row">
             <span>Subtotal</span>
@@ -169,7 +173,7 @@ const Checkout = () => {
             </button>
           </div>
           {promoMsg && (
-            <div className={`promo-msg${appliedPromo ? " success" : " error"}`}>
+            <div className={`promo-msg${appliedPromo ? " success" : " error"}${appliedPromo === "free" ? " free-discount" : ""}`}>
               {promoMsg}
             </div>
           )}

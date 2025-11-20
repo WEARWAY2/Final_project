@@ -251,6 +251,38 @@
   margin-top: 1rem;
 }
 
+/* Promo Messages */
+.promo-msg {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.promo-msg.success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.promo-msg.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Special styling for 100% discount */
+.promo-msg.free-discount {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 2px solid #22c55e;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .checkout-grid {
