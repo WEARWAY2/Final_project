@@ -53,7 +53,7 @@ const Checkout = () => {
   return (
     <div
       className="checkout-page"
-      style={{ borderRadius: "12px", overflow: "hidden"}}
+      style={{ borderRadius: "12px", overflow: "hidden" }}
     >
       <div className="checkout-header">
         <h1>YOUR CART</h1>
@@ -173,7 +173,11 @@ const Checkout = () => {
             </button>
           </div>
           {promoMsg && (
-            <div className={`promo-msg${appliedPromo ? " success" : " error"}${appliedPromo === "free" ? " free-discount" : ""}`}>
+            <div
+              className={`promo-msg${appliedPromo ? " success" : " error"}${
+                appliedPromo === "free" ? " free-discount" : ""
+              }`}
+            >
               {promoMsg}
             </div>
           )}

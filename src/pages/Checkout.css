@@ -20,15 +20,18 @@
 /* Main Grid Layout */
 .checkout-grid {
   display: grid;
-  grid-template-columns: 1fr 380px; /* Adjusted column width for the summary */
-  gap: 2rem; /* Increased gap between items and summary */
+  grid-template-columns: 1fr 380px;
+  /* Adjusted column width for the summary */
+  gap: 2rem;
+  /* Increased gap between items and summary */
 }
 
 /* Cart Items Section */
 .checkout-items {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Increased gap between individual items */
+  gap: 1.5rem;
+  /* Increased gap between individual items */
 }
 
 /* Individual Cart Item Row */
@@ -83,7 +86,8 @@
 /* Item Actions (Quantity and Remove) */
 .ci-actions {
   display: flex;
-  flex-direction: column; /* Stacked remove button above quantity */
+  flex-direction: column;
+  /* Stacked remove button above quantity */
   align-items: flex-end;
   gap: 2rem;
   justify-content: space-between;
@@ -294,24 +298,32 @@
   .checkout-page {
     padding: 1rem;
   }
+
   .checkout-header h1 {
     font-size: 2rem;
   }
+
   .ci-row {
-    grid-template-columns: 80px 1fr; /* Stack actions below info on small screens */
+    grid-template-columns: 80px 1fr;
+    /* Stack actions below info on small screens */
     gap: 1rem;
   }
+
   .ci-info {
     grid-column: 2 / 3;
   }
+
   .ci-actions {
-    grid-column: 1 / 3; /* Actions span full width */
-    flex-direction: row-reverse; /* Puts remove button on the left */
+    grid-column: 1 / 3;
+    /* Actions span full width */
+    flex-direction: row-reverse;
+    /* Puts remove button on the left */
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
     gap: 1rem;
   }
+
   .ci-thumb {
     width: 80px;
     height: 80px;
