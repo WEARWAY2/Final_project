@@ -490,15 +490,6 @@ const Home = () => {
                   <div className="selling-card-content">
                     <div className="selling-card-badge">
                       <motion.div
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          rotate: [0, 5, -5, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
                         style={{ display: "inline-flex" }}
                       >
                         <FaStar size={16} color="#FFD700" />
@@ -589,15 +580,6 @@ const Home = () => {
             >
               <div className="perk-icon-wrapper" aria-hidden="true">
                 <motion.div
-                  animate={{
-                    x: [0, 10, 0],
-                    y: [0, -5, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
                 >
                   <FaTruck size={28} />
                 </motion.div>
@@ -642,15 +624,6 @@ const Home = () => {
             >
               <div className="perk-icon-wrapper" aria-hidden="true">
                 <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    rotate: [0, -5, 5, 0],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
                 >
                   <FaLock size={28} />
                 </motion.div>
@@ -669,15 +642,7 @@ const Home = () => {
             >
               <div className="perk-icon-wrapper" aria-hidden="true">
                 <motion.div
-                  animate={{
-                    y: [0, -8, 0],
-                    rotate: [0, 10, -10, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                
                 >
                   <FaHeadset size={28} />
                 </motion.div>
