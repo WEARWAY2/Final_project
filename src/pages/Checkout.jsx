@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTrash, FaArrowRight, FaMinus, FaPlus } from "react-icons/fa";
+import { FaTrash, FaArrowRight, FaMinus, FaPlus, FaCheckCircle } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import "./Checkout.css";
 
@@ -26,6 +27,16 @@ const Checkout = () => {
   const [promoInput, setPromoInput] = React.useState("");
   const [appliedPromo, setAppliedPromo] = React.useState(null);
   const [promoMsg, setPromoMsg] = React.useState("");
+  const [showModal, setShowModal] = React.useState(false);
+  const [orderId, setOrderId] = React.useState("");
+
+  const handleCheckout = () => {
+    const validOrderIds = ["ORD-001", "ORD-002", "ORD-003"];
+    const randomId = validOrderIds[Math.floor(Math.random() * validOrderIds.length)];
+    setOrderId(randomId);
+    setShowModal(true);
+    clearCart();
+  };
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -189,16 +200,48 @@ const Checkout = () => {
           <button
             className="btn-primary block"
             disabled={cartItems.length === 0}
-            onClick={() => {
-              // Confirm purchase flow placeholder
-              clearCart();
-              navigate("/shop");
-            }}
+            onClick={handleCheckout}
           >
             Go to Checkout <FaArrowRight style={{ marginLeft: "6px" }} />
           </button>
         </aside>
       </div>
+
+      <AnimatePresence>
+        {showModal && (
+          <div className="modal-overlay">
+            <motion.div 
+              className="modal-content"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+            >
+              <FaCheckCircle size={64} className="modal-icon" />
+              <h2 className="modal-title">Order Placed Successfully!</h2>
+              <p className="modal-text">Thank you for your purchase. Your order has been received.</p>
+              
+              <div className="order-id-box">
+                Order ID: {orderId}
+              </div>
+              
+              <div className="modal-actions">
+                <button 
+                  className="btn-primary"
+                  onClick={() => navigate("/track-order")}
+                >
+                  Track Order
+                </button>
+                <button 
+                  className="btn-secondary"
+                  onClick={() => navigate("/shop")}
+                >
+                  Continue Shopping
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
