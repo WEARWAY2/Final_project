@@ -10,6 +10,11 @@ import CategoryProducts from "./pages/CategoryProducts";
 import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
+import TrackOrder from "./pages/TrackOrder";
+import DeliveryDetails from "./pages/DeliveryDetails";
+import TermsConditions from "./pages/TermsConditions";
+import Privacy from "./pages/Privacy";
+import HelpCenter from "./pages/HelpCenter";
 import BackToTop from "./component/BackToTop";
 import ScrollToTop from "./component/ScrollToTop";
 import AppleIntroLoader from "./component/AppleIntroLoader";
@@ -32,6 +37,11 @@ function App() {
                   element={<ProductDetails />}
                 />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/track-order" element={<TrackOrder />} />
+                <Route path="/delivery-details" element={<DeliveryDetails />} />
+                <Route path="/terms-conditions" element={<TermsConditions />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/help-center" element={<HelpCenter />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Footer />

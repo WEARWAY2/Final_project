@@ -241,13 +241,13 @@ const Footer = () => {
                 <Link to="/checkout">Checkout</Link>
               </li>
               <li>
-                <Link to="/shop">Delivery Details</Link>
+                <Link to="/delivery-details">Delivery Details</Link>
               </li>
               <li>
-                <a href="#terms">Terms & Conditions</a>
+                <Link to="/terms-conditions">Terms & Conditions</Link>
               </li>
               <li>
-                <a href="#privacy">Privacy Policy</a>
+                <Link to="/privacy">Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -282,10 +282,10 @@ const Footer = () => {
                 <Link to="/checkout">Checkout</Link>
               </li>
               <li>
-                <Link to="/">Track Order</Link>
+                <Link to="/track-order">Track Order</Link>
               </li>
               <li>
-                <a href="#help">Help Center</a>
+                <Link to="/help-center">Help Center</Link>
               </li>
             </ul>
           </div>
