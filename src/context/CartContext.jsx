@@ -52,16 +52,35 @@ export const CartProvider = ({ children }) => {
   }, [wishlistItems]);
 
   const addToCart = (product) => {
+    const qtyToAdd = Math.max(1, Number(product.quantity) || 1);
+    const selectedColor = product.selectedColor ?? null;
+    const selectedSize = product.selectedSize ?? null;
+
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+      const existingIndex = prev.findIndex(
+        (item) =>
+          item.id === product.id &&
+          (item.selectedColor ?? null) === selectedColor &&
+          (item.selectedSize ?? null) === selectedSize
+      );
+
+      if (existingIndex !== -1) {
+        return prev.map((item, idx) =>
+          idx === existingIndex
+            ? { ...item, quantity: item.quantity + qtyToAdd }
             : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+
+      return [
+        ...prev,
+        {
+          ...product,
+          selectedColor,
+          selectedSize,
+          quantity: qtyToAdd,
+        },
+      ];
     });
   };
 
