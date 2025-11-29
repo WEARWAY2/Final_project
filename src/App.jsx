@@ -23,8 +23,8 @@ function App() {
   return (
     <ThemeProvider>
       <CartProvider>
-        <AppleIntroLoader>
-          <Router>
+        <Router>
+          <AppleIntroLoader>
             <ScrollToTop />
             <div className="app">
               <Header />
@@ -47,8 +47,8 @@ function App() {
               <Footer />
             </div>
             <BackToTop />
-          </Router>
-        </AppleIntroLoader>
+          </AppleIntroLoader>
+        </Router>
       </CartProvider>
     </ThemeProvider>
   );
