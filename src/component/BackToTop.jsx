@@ -9,13 +9,13 @@ const BackToTop = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     
     // Debug logging
-    console.log('Scroll position:', scrollTop);
+    // console.log('Scroll position:', scrollTop);
     
     if (scrollTop > 300) {
-      console.log('Button should be visible');
+      // console.log('Button should be visible');
       setIsVisible(true);
     } else {
-      console.log('Button should be hidden');
+      // console.log('Button should be hidden');
       setIsVisible(false);
     }
   };
